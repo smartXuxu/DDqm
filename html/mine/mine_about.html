@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+
+    <title>意见反馈</title>
+    <link rel="stylesheet" href="../../css/base.css"/>
+    <link rel="stylesheet" href="../../css/header.css"/>
+    <style>
+        /*b8b8b8*/
+        /*改变placeholder的字体颜色*/
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: #000; opacity:1;
+        }
+
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: #000;opacity:1;
+        }
+
+        input:-ms-input-placeholder{
+            color: #000;opacity:1;
+        }
+
+        input::-webkit-input-placeholder{
+            color: #000;opacity:1;
+        }
+        .main{
+            padding-top: 2rem;
+        }
+        .main>textarea{
+            box-sizing: border-box;
+            width: 90%;
+            position: relative;
+            left: 5%;
+            height: 5rem;
+            background-color: #f2f2f2;
+            border: none;
+            border-radius: 5px;
+            margin-top: 0.5rem;
+            padding: 0.3rem;
+            text-indent: 0;
+            font-size: 0.28rem;
+        }
+        .main>em{
+            width: 0.8rem;
+            height: 0.8rem;
+            position: fixed;
+            right: 5%;
+            top: 50%;
+            background: url("../../img/mine_about_del_03.png") no-repeat center;
+            -webkit-background-size: 100%;
+            background-size: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="layer">
+    <header>
+        <i onclick="back()"></i>
+        <h3>意见反馈</h3>
+        <em>提交</em>
+    </header>
+    <div class="main">
+        <textarea placeholder="请输入您的意见..."></textarea>
+        <em class="del"></em>
+    </div>
+</div>
+</body>
+<script src="../../js/common/x_rem.js"></script>
+<script src="../../js/common/zepto.min.js"></script>
+<script src="../../js/common/selector.js"></script>
+<script src="../../js/common/touch.js"></script>
+<script src="../../js/common/base.js"></script>
+<script src="../../js/common/back.js"></script>
+<script>
+    $(function () {
+        $(".del").tap(function () {
+            $("textarea").val("");
+        })
+    })
+</script>
+</html>

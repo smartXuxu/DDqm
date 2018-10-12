@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+
+    <title>设置</title>
+    <link rel="stylesheet" href="../../css/base.css"/>
+    <link rel="stylesheet" href="../../css/header.css"/>
+    <link rel="stylesheet" href="../../css/mui.min.css"/>
+    <style>
+        /*b8b8b8*/
+        /*改变placeholder的字体颜色*/
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: #000; opacity:1;
+        }
+
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: #000;opacity:1;
+        }
+
+        input:-ms-input-placeholder{
+            color: #000;opacity:1;
+        }
+
+        input::-webkit-input-placeholder{
+            color: #000;opacity:1;
+        }
+        body{
+            background-color: #fff;!important;
+        }
+        .layer>header{
+            height: 1.6rem;
+        }
+        .layer>header>h3{
+            line-height: 1rem;
+        }
+        .main{
+            padding-top: 1.8rem;
+        }
+        .main>ul{
+            width: 100%;
+        }
+        .main>ul>li{
+            height: 1rem;
+            margin-top: 0.4rem;
+            line-height: 1rem;
+            background-color: #f3f3f3;
+            padding-left: 0.6rem;
+            position: relative;
+        }
+        .main>ul>li>a{
+            color:#333;
+            font-size: 0.28rem;
+            display: block;
+        }
+        .main>ul>li>a>em{
+            left: 3%;
+            top: 15%;
+            width: 0.6rem;
+            height: 0.6rem;
+            position: absolute;
+            background: url("../../img/mine_hrl_03.png") no-repeat center;
+            -webkit-background-size: 130%;
+            background-size: 130%;
+            vertical-align: middle;
+        }
+        .main>ul>li:last-of-type em{
+            background-image: url("../../img/mine_about_ab.png");
+            -webkit-background-size: 90%;
+            background-size: 90%;
+        }
+        .main>ul>li>a>span{
+            margin-left: 0.5rem;
+        }
+        .main>ul>li>a>i{
+            position: absolute;
+            right: 3%;
+            top: 25%;
+            font-size: 0.4rem;
+        }
+        .quit_login{
+            height: 0.8rem;
+            width: 30%;
+            background-color: #e8a94e;
+            display: block;
+            font-size: 0.32rem;
+            margin:0 auto;
+            margin-top: 1.5rem;
+            color:#fff;
+        }
+    </style>
+</head>
+<body>
+<div class="layer">
+    <header>
+        <i onclick="back()"></i>
+        <h3>设置</h3>
+    </header>
+    <div class="main">
+        <ul>
+            <li>
+                <a href="./mine_health.html">
+                    <em></em>
+                    <span>健康证认证</span>
+                    <i class="mui-icon mui-icon-arrowright"></i>
+                </a>
+            </li>
+            <li>
+                <a href="./mine_about_about.html">
+                    <em></em>
+                    <span>关于</span>
+                    <i class="mui-icon mui-icon-arrowright"></i>
+                </a>
+            </li>
+        </ul>
+        <button class="quit_login">退出登录</button>
+    </div>
+</div>
+</body>
+<script src="../../js/common/x_rem.js"></script>
+<script src="../../js/common/zepto.min.js"></script>
+<script src="../../js/common/selector.js"></script>
+<script src="../../js/common/mui.min.js"></script>
+<script src="../../js/common/touch.js"></script>
+<script src="../../js/common/base.js"></script>
+<script src="../../js/common/back.js"></script>
+<script>
+    $(function () {
+
+        mui('body').on('tap','a',function(){document.location.href=this.href;});
+        $(".del").tap(function () {
+            $("textarea").val("");
+        });
+        $(".quit_login").tap(function () {
+            localStorage.removeItem("pwd");
+            location.href='../login.html';
+        })
+    })
+</script>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+
+    <title>健康证认证</title>
+    <link rel="stylesheet" href="../../css/base.css"/>
+    <link rel="stylesheet" href="../../css/header.css"/>
+    <style>
+        .main{
+            padding-top: 1.8rem;
+            border-bottom: 0.2rem solid #eeeeee;
+        }
+        .open{
+            width: 60%;
+            margin: 0 auto;
+            margin-top: 1rem;
+            text-align: center;
+
+        }
+       .open>.open_box{
+            background:url("../../img/my_hel_card.png") no-repeat center;
+            -webkit-background-size: 80%;
+            background-size: 80%;
+            height: 3.2rem;
+            margin-left: 0.2rem;
+            border: 1px solid #000;
+            border-radius:10px;
+           margin-bottom: 0.2rem;
+        }
+
+         .open input{
+            display: block;
+            height: 100%;
+            width: 100%;
+            opacity:0;
+            border: none;
+        }
+        .open>em{
+         color:#707070;
+            font-size: 0.3rem;
+        }
+        .open>p{
+            padding-top: 0.1rem;
+            font-size: 0.26rem;
+            color:#999;
+            padding-bottom: 0.3rem;
+            width: 100%;
+        }
+        .begin_path{
+            width: 40%;
+
+            height: 0.8rem;
+            display: block;
+            margin:0 auto;
+            color:#fff;
+            background-color: #f1ae4d;
+            font-size: 0.3rem;
+            border-radius: 15px;
+            margin-top: 1rem;
+        }
+    </style>
+
+</head>
+<body>
+<div class="layer">
+    <header>
+        <i onclick="back()"></i>
+        <h3>健康证认证</h3>
+    </header>
+    <div class="main">
+        <div class="open">
+            <div class="open_box">
+                <input type="file" id="just" accept="image/*" capture="camera"/>
+            </div>
+            <em>上传证件</em>
+            <p>请上传健康证正面照片</p>
+        </div>
+    </div>
+    <button class="begin_path">立即认证</button>
+</div>
+</body>
+<script src="../../js/common/x_rem.js"></script>
+<script src="../../js/common/zepto.min.js"></script>
+<script src="../../js/common/selector.js"></script>
+<script src="../../js/common/touch.js"></script>
+<script src="../../js/common/mui.min.js"></script>
+<script src="../../js/common/base.js"></script>
+<script>
+$(function () {
+    document.querySelector("#just").onchange=function () {
+        var file=document.querySelector("#just").files;
+
+        html5Reader(file,".open_box");
+        // console.log(base64IdCardFront);
+    }
+    function html5Reader(file,ele){
+        //var file = file.files[0];
+        var reader = new FileReader();
+        // reader.readAsDataURL(file);
+        reader.readAsDataURL(file[0]);
+        reader.onload = function(e){
+            var pic = document.querySelector(ele);
+            pic.style.backgroundImage="url("+reader.result+")";
+            var des=reader.result;
+            // console.log(des);
+        }
+    }
+
+})
+</script>
+</html>

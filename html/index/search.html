@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+
+    <title>搜索</title>
+    <link rel="stylesheet" href="../../css/base.css"/>
+    <link rel="stylesheet" href="../../css/sweetalert2.css"/>
+    <link rel="stylesheet" href="../../css/index/index.css"/>
+    <link rel="stylesheet" href="../../css/header.css"/>
+    <style>
+
+        .layer>header>input{
+            height: 0.8rem;
+            line-height:0.8rem;
+            margin-left:1.3rem;
+            text-indent:3em;
+            width: 65%;
+            text-align: left;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+        }
+        .select>header>.search-btn{
+            color:#fff;
+            font-size:0.30rem;
+            margin-left: 0.2rem;
+            top: 21%;
+            background: none;
+        }
+        .layer>header:before{
+            width: 0.5rem;
+            height: 0.6rem;
+            content:"";
+            background:url("../../img/search.png") no-repeat center;
+            -webkit-background-size: 100%;
+            background-size: 100%;
+            position:absolute;
+            left: 20%;
+            top: 45%;
+        }
+        .main{
+            padding-top: 1.8rem;
+        }
+
+    </style>
+</head>
+<body>
+<div class="layer select">
+    <header>
+        <i onclick="back()"></i>
+        <input type="text"  placeholder="请输入搜索内容" id="search" />
+        <del class="search-btn">搜索</del>
+    </header>
+    <div class="main">
+        <div class="lists">
+            <div class="list clearfix" onclick="location.href='./job_detail.html'">
+                <img src="../../img/eatCooker.png" alt=""/>
+                <div class="center clearfix">
+                    <em>四川口味饭四川口味饭四川口味饭四川口味饭</em>
+                    <del>￥20/次&nbsp;&nbsp;&nbsp;&nbsp; <i>金水区</i></del>
+                </div>
+                <div class="right">已健康认证</div>
+            </div>
+            <div class="list clearfix" onclick="location.href='./job_detail.html'">
+                <img src="../../img/focus-img1.png" alt=""/>
+                <div class="center clearfix">
+                    <em>四川口味饭四川口味饭四川口味饭四川口味饭</em>
+                    <del>￥20/次&nbsp;&nbsp;&nbsp;&nbsp; <i>金水区</i></del>
+                </div>
+                <div class="right">已健康认证</div>
+            </div>
+            <div class="list clearfix" onclick="location.href='./job_detail.html'">
+                <img src="../../img/eatCooker.png" alt=""/>
+                <div class="center clearfix">
+                    <em>四川口味饭四川口味饭四川口味饭四川口味饭</em>
+                    <del>￥20/次&nbsp;&nbsp;&nbsp;&nbsp; <i>金水区</i></del>
+                </div>
+                <div class="right">已健康认证</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script src="../../js/common/x_rem.js"></script>
+<script src="../../js/common/zepto.min.js"></script>
+<script src="../../js/common/selector.js"></script>
+<script src="../../js/common/touch.js"></script>
+<script src="../../js/common/sweetalert2.js"></script>
+<script src="../../js/common/base.js"></script>
+<script src="../../js/common/back.js"></script>
+<script src="../../js/common/template-web.js"></script>
+<script src="../../js/common/template.js"></script>
+<script type="text/template" id="historyTpl">
+
+
+</script>
+<script>
+
+</script>
+</html>

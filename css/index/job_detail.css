@@ -1,0 +1,97 @@
+
+.main{
+    padding:0 0.5rem;
+    padding-top: 1.8rem;
+}
+.main>h2{
+    height: 1.2rem;
+    line-height: 1.2rem;
+    font-size: 0.34rem;
+    color:#333;
+}
+.main>div{
+    display: block;
+    font-size: 0.30rem;
+    color:#707070;
+
+}
+.main>div>div,.main>h3{
+    font-size: 0.30rem;
+    color:#707070;
+    height: 0.8rem;
+    line-height: 0.8rem;
+}
+.main>div>.le{
+    width: 30%;
+}
+.main>div>.re{
+    width: 60%;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+}
+.pri_detail{
+    width: 100%;
+    height: 0.8rem;
+    line-height: 0.8rem ;
+}
+.pri_detail>em,.pri_detail>i,.pri_detail>del{
+    color:#e03f1f;
+    border-right: 1px solid #eeeeee;
+    padding-right: 0.2rem;
+}
+.pri_detail>i,.pri_detail>del{
+    color:#707070;
+    padding-left: 0.3rem;
+}
+.main>p{
+    font-size: 0.28rem;
+    color:#333;
+    height: 0.6rem;
+    line-height: 0.6rem;
+}
+.address>em{
+    width: 0.6rem;
+    height: 0.6rem;
+    display: inline-block;
+    vertical-align: middle;
+    background: url("../../img/point%20(2).png") no-repeat center;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+}
+.main>.button{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    height: 1rem;
+    padding:0 0;
+    z-index: 1;
+    left: 0;
+    border-top: 1px solid #f3f3f3;
+    background-color: #eee;
+}
+.button>button{
+    width: 49.2%;
+    padding-left: 0;
+    font-size: 0.3rem;
+    background-color: #fff;
+}
+.button>button:first-of-type{
+    background-color: #eee;
+}
+.button>button img{
+    width: 10%;
+    margin-top: -0.2rem;
+    vertical-align: middle;
+}
+.button>button>em{
+    display:block;
+    margin-top: -0.1rem;
+}
+.button>button:last-of-type{
+    line-height:1rem;
+    color:#fff;
+    background-color: #e8a94e;
+}

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>咚咚敲门首页</title>
+    <link rel="stylesheet" href="../../css/base.css"/>
+    <link rel="stylesheet" href="../../css/mui.min.css">
+    <link rel="stylesheet" href="../../css/index/index.css">
+    <link rel="stylesheet" href="../../css/footer.css">
+</head>
+<body>
+<div class="layer">
+    <header>
+        <div class="tit">
+            <em onclick="location.href='./select_city.html'">北京 <s>&nbsp;∨</s></em>
+            <input type="text" id="search"/>
+        </div>
+        <div id="slider" class="mui-slider" >
+            <div class="mui-slider-group mui-slider-loop">
+                <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+                <div class="mui-slider-item mui-slider-item-duplicate">
+                    <a href="#">
+                        <img src="../../img/index_1.png">
+                    </a>
+                </div>
+                <!-- 第一张 -->
+                <div class="mui-slider-item">
+                    <a href="#">
+                        <img src="../../img/index_1.png">
+                    </a>
+                </div>
+                <!-- 第二张 -->
+                <div class="mui-slider-item">
+                    <a href="#">
+                        <img src="../../img/index_1.png">
+                    </a>
+                </div>
+                <!-- 第三张 -->
+                <div class="mui-slider-item">
+                    <a href="#">
+                        <img src="../../img/index_1.png">
+                    </a>
+                </div>
+                <!-- 第四张 -->
+                <div class="mui-slider-item">
+                    <a href="#">
+                        <img src="../../img/index_1.png">
+                    </a>
+                </div>
+                <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+                <div class="mui-slider-item mui-slider-item-duplicate">
+                    <a href="#">
+                        <img src="../../img/index_1.png">
+                    </a>
+                </div>
+            </div>
+            <div class="mui-slider-indicator">
+                <div class="mui-indicator mui-active"></div>
+                <div class="mui-indicator"></div>
+                <div class="mui-indicator"></div>
+                <div class="mui-indicator"></div>
+            </div>
+        </div>
+    </header>
+    <!--导航列表-->
+    <div class="nav">
+        <ul>
+            <li>
+                <a href="clean.html">
+                    <span>
+
+                    </span>
+                    <i>打扫卫生</i>
+                </a>
+            </li>
+            <li>
+                <a href="wash.html">
+                    <span>
+                    </span>
+                    <i>洗衣服</i>
+                </a>
+            </li>
+            <li>
+                <a href="guide.html">
+                    <span>
+
+                    </span>
+                    <i>导游</i>
+                </a>
+            </li>
+            <li>
+                <a href="eatCooker.html">
+                    <span>
+
+                    </span>
+                    <i>做饭</i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!--选择列表-->
+    <div class="choose_list">
+        <ul class="clearfix">
+            <li>
+                <a  href="javascript:;">发布时间 <del class="mui-icon mui-icon-arrowdown"></del></a>
+                <ul class="nearTime">
+                    <li>最近三天</li>
+                    <li>最近半月</li>
+                    <li>最近一月</li>
+                </ul>
+            </li>
+            <li><a  href="javascript:;">离我最近</a></li>
+            <li>
+                <a href="javascript:;">性别 <del class="mui-icon mui-icon-arrowdown"></del></a>
+                <ul class="sex">
+                    <li>全部</li>
+                    <li>男生可做</li>
+                    <li>女生可做</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="lists">
+        <div class="list clearfix" onclick="location.href='./job_detail.html'">
+            <img src="../../img/eatCooker.png" alt=""/>
+            <div class="center clearfix">
+                <em>四川口味饭四川口味饭四川口味饭四川口味饭</em>
+                <del>￥20/次&nbsp;&nbsp;&nbsp;&nbsp; <i>金水区</i></del>
+            </div>
+            <div class="right">已健康认证</div>
+        </div>
+        <div class="list clearfix" onclick="location.href='./job_detail.html'">
+            <img src="../../img/focus-img1.png" alt=""/>
+            <div class="center clearfix">
+                <em>四川口味饭四川口味饭四川口味饭四川口味饭</em>
+                <del>￥20/次&nbsp;&nbsp;&nbsp;&nbsp; <i>金水区</i></del>
+            </div>
+            <div class="right">已健康认证</div>
+        </div>
+        <div class="list clearfix" onclick="location.href='./job_detail.html'">
+            <img src="../../img/eatCooker.png" alt=""/>
+            <div class="center clearfix">
+                <em>四川口味饭四川口味饭四川口味饭四川口味饭</em>
+                <del>￥20/次&nbsp;&nbsp;&nbsp;&nbsp; <i>金水区</i></del>
+            </div>
+            <div class="right">已健康认证</div>
+        </div>
+    </div>
+    <footer>
+        <ul>
+            <li class="active" onclick="location.href='./index.html'">
+                <i></i>
+                <span>首页</span>
+            </li>
+            <li onclick="location.href='../publish/publish.html'">
+                <i></i>
+                <span>发布</span>
+            </li>
+            <li onclick="location.href='../mine/mine.html'">
+                <i></i>
+                <span>我的</span>
+            </li>
+        </ul>
+    </footer>
+</div>
+</body>
+<script src="../../js/common/x_rem.js"></script>
+<script src="../../js/common/zepto.min.js"></script>
+<script src="../../js/common/selector.js"></script>
+<script src="../../js/common/touch.js"></script>
+<script src="../../js/common/mui.min.js"></script>
+<script src="../../js/common/base.js"></script>
+
+<script>
+    $(function(){
+        mui.init({
+            swipeBack:true //启用右滑关闭功能
+        });
+        mui('body').on('tap','a',function(){document.location.href=this.href;});
+        var slider = mui("#slider");
+        slider.slider({
+            interval: 2000//自动轮播周期，若为0则不自动播放，默认为0；
+        });
+        $("#search").focus(function () {
+            location.href='search.html';
+        });
+        var flag=true;
+            $(".choose_list>ul>li").tap(function () {
+                if(flag){
+                    $(this).children().show();
+                   // console.log($(this));
+                    $(this).find("a").addClass("active");
+                    $(this).siblings().find("a").removeClass("active");
+                    $(this).find("del").removeClass("mui-icon-arrowdown");
+                    $(this).find("del").addClass("mui-icon-arrowup");
+                    flag=false;
+                }else{
+                    $(this).children("ul").hide();
+                    $(this).find("a").removeClass("active");
+                    $(this).find("del").removeClass("mui-icon-arrowup");
+                    $(this).find("del").addClass("mui-icon-arrowdown");
+                    flag = true;
+                }
+            })
+        $(".choose_list>ul>li li").tap(function () {
+           // alert(1);
+        })
+    })
+</script>
+</html>

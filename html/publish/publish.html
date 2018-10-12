@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>发布界面</title>
+    <link rel="stylesheet" href="../../css/base.css"/>
+    <link rel="stylesheet" href="../../css/publish/publish.css"/>
+
+</head>
+<body>
+<div id="mask"></div>
+<div class="layer">
+    <header class="clearfix">
+        <h3>发布</h3>
+    </header>
+    <div class="main">
+        <ul class="clearfix">
+            <li>
+                <a href="./send_orders.html">
+                    <img src="../../img/send_order.png" alt=""/>
+                    <span>选单</span>
+                </a>
+            </li>
+            <li>
+                <a href="./bill.html">
+                    <img src="../../img/bill.png" alt=""/>
+                    <span>派单</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="del"></div>
+</div>
+<script src="../../js/common/x_rem.js"></script>
+<script src="../../js/common/zepto.min.js"></script>
+<script src="../../js/common/touch.js"></script>
+<script src="../../js/common/base.js"></script>
+<script src="../../js/common/back.js"></script>
+<script>
+    // 点击 del  页面消失，进入到主页的发布
+    $(function(){
+        $(".del").tap(function(){
+            back();
+        })
+    })
+</script>
+
+
+</body>
+</html>

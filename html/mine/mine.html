@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>我的资料</title>
+    <link rel="stylesheet" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" href="../../css/base.css"/>
+    <link rel="stylesheet" href="../../css/footer.css"/>
+    <link rel="stylesheet" href="../../css/mine/mine.css"/>
+</head>
+<body>
+<div class="layer">
+<header>
+    <div class="operation">
+        <em></em>
+        <i></i>
+    </div>
+    <div class="content">
+        <img src="../../img/focus-img1.png" alt=""/>
+        <h3>白雪</h3>
+        <p>未认证</p>
+        <h4>认证信息</h4>
+    </div>
+</header>
+    <div class="main">
+        <ul class="content_main">
+            <li class="mine_data">
+                <em></em>
+                <div>
+                    <span>个人资料</span>
+                    <i class="mui-icon mui-icon-arrowright"></i>
+                </div>
+            </li>
+            <li class="mine_account">
+                <em></em>
+                <div>
+                    <span>账户管理</span>
+                    <i class="mui-icon mui-icon-arrowright"></i>
+                </div>
+            </li>
+            <li class="mine_order">
+                <em></em>
+                <div>
+                    <span>订单管理</span>
+                    <i class="mui-icon mui-icon-arrowright"></i>
+                </div>
+
+            </li>
+            <li class="mine_set" onclick="location.href='./mine_set.html'">
+                <em></em>
+                <div>
+                    <span>设置</span>
+                    <i class="mui-icon mui-icon-arrowright"></i>
+                </div>
+
+            </li>
+            <li class="mine_about" onclick="location.href='./mine_about.html'">
+                <em></em>
+                <div>
+                    <span>意见反馈</span>
+                    <i class="mui-icon mui-icon-arrowright"></i>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <footer>
+        <ul>
+            <li onclick="location.href='../index/index.html'">
+                <i></i>
+                <span>首页</span>
+            </li>
+            <li onclick="location.href='../publish/publish.html'">
+                <i></i>
+                <span>发布</span>
+            </li>
+            <li  class="active" onclick="location.href='./mine.html'">
+                <i></i>
+                <span>我的</span>
+            </li>
+        </ul>
+    </footer>
+</div>
+</body>
+<script src="../../js/common/x_rem.js"></script>
+<script src="../../js/common/zepto.min.js"></script>
+<script src="../../js/common/selector.js"></script>
+<script src="../../js/common/touch.js"></script>
+<script src="../../js/common/mui.min.js"></script>
+<script src="../../js/common/base.js"></script>
+<script>
+$(function () {
+    mui('body').on('tap','a',function(){document.location.href=this.href;});
+})
+</script>
+</html>

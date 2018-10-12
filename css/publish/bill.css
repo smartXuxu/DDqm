@@ -1,0 +1,103 @@
+body{
+    background-color: #fff;!important;
+}
+.layer>header{
+    height: 1.6rem;
+}
+.layer>header>h3{
+    line-height: 1.2rem;
+    font-size: 0.4rem;
+}
+
+.mui-icon{
+    font-size: 0.28rem;
+}
+.main{
+    padding:2rem 0.5rem 0 0.5rem;
+
+}
+.main>div{
+    height: 1.2rem;
+    line-height:1.2em;
+    padding-bottom: 0.2rem;
+    border-bottom: 1px solid #eeeeee;
+}
+.main>div>span{
+    width: 30%;
+    line-height: 1.2rem;
+    font-size: 0.3rem;
+}
+.main>div>a{
+    width: 68%;
+    color:#999;
+    line-height: 1rem;
+    display: inline-block;
+    text-align: right;
+}
+.main>div>input{
+    width: 68%;
+    border: none;
+    text-align: right;
+    height: 0.9rem;
+    color:#999;
+    line-height: 0.9rem;
+    padding-right:0;
+}
+.beg_time>span,.end_time>span{
+    line-height: 1rem;
+}
+.beg_time>.kinerDatePickerInput,.end_time>.kinerDatePickerInput{
+    height: 1.2rem;
+    line-height: 1.2rem;
+    color:#999;
+    width: 66%;
+    text-align: right;
+}
+.main>.job_des{
+    border-bottom: none;
+    height: 2rem;
+    margin-top: 0.2rem;
+}
+.main>.job_des>span{
+    vertical-align: top;
+}
+.job_des>textarea{
+    width: 68%;
+    display: inline-block;
+    height: 2rem;
+    padding:0.3rem;
+    color:#999;
+}
+.pub{
+    width: 95%;
+    height: 1rem;
+    line-height: 1rem;
+    color:#fff;
+    background-color: #e9a94f;
+    display: block;
+    margin:0 auto;
+    margin-top:1rem;
+}
+.mui-card{
+    box-shadow: none;
+}
+a:hover{
+    text-decoration: none;!important;
+}
+.mui-table-view-radio .mui-table-view-cell .mui-navigate-right:after{
+    color:#e9a94f;
+}
+.mui-popover .mui-table-view .mui-table-view-cell:first-child, .mui-popover .mui-table-view .mui-table-view-cell:first-child>a:not(.mui-btn){
+    height: 1.3rem;
+}
+.main>.pail_require>input{
+    width: 52%;
+
+    margin-right: 0;
+    padding-right: 0;
+}
+.main>.pail_require>a{
+   width: 15%;
+
+    text-align: right;
+}
