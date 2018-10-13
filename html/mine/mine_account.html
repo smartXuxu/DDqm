@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>账户管理</title>
+    <link rel="stylesheet" href="../../css/base.css"/>
+    <link rel="stylesheet" href="../../css/header.css"/>
+    <link rel="stylesheet" href="../../css/mui.min.css"/>
+    <style>
+        html{
+            background-color: #eeeeee;
+        }
+        .layer>header{
+            height: 1.6rem;
+            border-bottom: none;
+        }
+        .layer>header>h3{
+            line-height: 1rem;
+        }
+        .main{
+            padding-top: 1.6rem;
+        }
+        .header{
+            height: 2.6rem;
+            width: 100%;
+            background-color: #e8a94e;
+            color:#fff;
+            text-align: center;
+        }
+        .header>p{
+            padding-top: 0.4rem;
+            color:#fcecdb;
+            font-size: 0.2rem;
+        }
+        .header>h3{
+           color:#fff;
+            font-size: 1rem;
+        }
+        .content{
+            width: 100%;
+            background-color: #fff;
+        }
+        .content>ul{
+            padding: 0 0.4rem;
+        }
+        .content>ul>li{
+            position: relative;
+            height: 1.2rem;
+            line-height: 1.2rem;
+            font-size: 0.3rem;
+            color:#666;
+            border-bottom: 1px solid #eeeeee;
+
+        }
+        .content>ul>li:nth-of-type(3){
+            border-bottom: none;
+        }
+        .content>ul>li>em{
+            width: 0.6rem;
+            height: 0.6rem;
+            vertical-align: middle;
+            display: inline-block;
+            background: url("../../img/account_pay.png") no-repeat center;
+            -webkit-background-size: 100%;
+            background-size: 100%;
+        }
+        .content>ul>li:nth-of-type(2) em{
+            background-image: url("../../img/account_widow.png");
+        }
+        .content>ul>li:nth-of-type(3) em{
+            background-image: url("../../img/account_his.png");
+            -webkit-background-size: 90%;
+            background-size: 90%;
+        }
+        .content>ul>li>span{
+            margin-left: 0.3rem;
+        }
+        .content>ul>li>i{
+            position: absolute;
+            right: 0%;
+            top: 30%;
+            font-size: 0.4rem;
+        }
+    </style>
+</head>
+<body>
+<div class="layer">
+    <header>
+        <i onclick="back()"></i>
+        <h3>账户管理</h3>
+    </header>
+    <div class="main">
+        <div class="header">
+            <p>账户余额(元)</p>
+            <h3>763.36</h3>
+        </div>
+        <div class="content">
+            <ul>
+                <li onclick="location.href='./my_purse_recharge.html'">
+                    <em></em>
+                    <span>充值</span>
+                    <i class="mui-icon mui-icon-arrowright"></i>
+                </li>
+                <li onclick="location.href='./my_purse_withdaw.html'">
+                    <em></em>
+                    <span>提现</span>
+                    <i class="mui-icon mui-icon-arrowright"></i>
+                </li>
+                <li onclick="location.href='./my_purse_detail.html'">
+                    <em></em>
+                    <span>交易记录</span>
+                    <i class="mui-icon mui-icon-arrowright"></i>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../../js/common/x_rem.js"></script>
+<script src="../../js/common/jquery.min.js"></script>
+<!--<script src="../../js/common/zepto.min.js"></script>
+<script src="../../js/common/selector.js"></script>
+<script src="../../js/common/touch.js"></script>-->
+<script src="../../js/common/base.js"></script>
+<script src="../../js/common/back.js"></script>
+</html>

@@ -82,33 +82,38 @@
 
 </body>
 <script src="../../js/common/x_rem.js"></script>
-<script src="../../js/common/zepto.min.js"></script>
+<script src="../../js/common/jquery.min.js"></script>
+<!--<script src="../../js/common/zepto.min.js"></script>
 <script src="../../js/common/selector.js"></script>
-<script src="../../js/common/touch.js"></script>
+<script src="../../js/common/touch.js"></script>-->
 <script src="../../js/common/mui.min.js"></script>
 <script src="../../js/common/base.js"></script>
 <script src="../../js/common/back.js"></script>
+<script src="../../js/common/fastclick.js"></script>
 <script>
-    var flag=true;
-    $(".choose_list>ul>li").tap(function () {
-        if(flag){
-            $(this).children().show();
-            // console.log($(this));
-            $(this).find("a").addClass("active");
-            $(this).siblings().find("a").removeClass("active");
-            $(this).find("del").removeClass("mui-icon-arrowdown");
-            $(this).find("del").addClass("mui-icon-arrowup");
-            flag=false;
-        }else{
-            $(this).children("ul").hide();
-            $(this).find("a").removeClass("active");
-            $(this).find("del").removeClass("mui-icon-arrowup");
-            $(this).find("del").addClass("mui-icon-arrowdown");
-            flag = true;
-        }
-    })
-    $(".choose_list>ul>li li").tap(function () {
-        // alert(1);
+    $(function () {
+        FastClick.attach(document.body);
+        var flag=true;
+        $(".choose_list>ul>li").click(function () {
+            if(flag){
+                $(this).children().show();
+                // console.log($(this));
+                $(this).find("a").addClass("active");
+                $(this).siblings().find("a").removeClass("active");
+                $(this).find("del").removeClass("mui-icon-arrowdown");
+                $(this).find("del").addClass("mui-icon-arrowup");
+                flag=false;
+            }else{
+                $(this).children("ul").hide();
+                $(this).find("a").removeClass("active");
+                $(this).find("del").removeClass("mui-icon-arrowup");
+                $(this).find("del").addClass("mui-icon-arrowdown");
+                flag = true;
+            }
+        })
+        $(".choose_list>ul>li li").click(function () {
+            // alert(1);
+        })
     })
 </script>
 </html>

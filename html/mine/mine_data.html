@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+
+    <title>个人资料</title>
+    <link rel="stylesheet" href="../../css/base.css"/>
+    <link rel="stylesheet" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" href="../../css/mui.picter.min.css"/>
+    <link rel="stylesheet" href="../../css/header.css"/>
+    <link href="../../css/birthday/mobiscroll_002.css" rel="stylesheet" type="text/css">
+    <link href="../../css/birthday/mobiscroll.css" rel="stylesheet" type="text/css">
+    <!--//生日-->
+    <script src="../../js/common/birthday/jquery.1.7.2.min.js"></script>
+    <script src="../../js/common/birthday/mobiscroll_002.js" type="text/javascript"></script>
+    <script src="../../js/common/birthday/mobiscroll_004.js" type="text/javascript"></script>
+    <script src="../../js/common/birthday/mobiscroll.js" type="text/javascript"></script>
+    <script src="../../js/common/birthday/mobiscroll_003.js" type="text/javascript"></script>
+    <script src="../../js/common/birthday/mobiscroll_005.js" type="text/javascript"></script>
+
+
+    <style>
+        body{
+            background-color: #fff;!important;
+        }
+        .layer>header{
+            height: 1.6rem;
+        }
+        .layer>h3{
+            line-height: 1.2rem;
+        }
+        .main{
+            width: 100%;
+            padding-left: 0.4rem;
+            padding-top: 1.8rem;
+        }
+        .main>div{
+            width: 100%;
+            height: 1rem;
+            line-height: 1rem;
+            border-bottom: 1px solid #eeeeee;
+
+        }
+        .main>div>span{
+            width: 30%;
+
+            font-size: 0.3rem;
+            color:#666;
+        }
+        .main>div>img{
+            width: 1rem;
+            height: 1rem;
+            margin-left:28%;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+        .main>.header{
+            padding-bottom: 0.1rem;
+            border-bottom: none;
+        }
+        .main>div>input{
+            width: 65%;
+            height: 0.8rem;
+            line-height: 0.8rem;
+            display: inline-block;
+            text-align: center;
+            border: none;
+            font-size: 0.28rem;
+            color:#666;
+        }
+        .main>.des{
+            border-top: 0.1rem solid #eeeeee;
+            height: auto;
+            border-bottom: none;
+        }
+        .main>.des>span{
+            display: block;
+            height: 0.8rem;
+        }
+        .main>.des>textarea{
+            height: 1.8rem;
+            width: 95%;
+            border-radius: 5px;
+            box-sizing: border-box;
+            padding: 0.3rem;
+            border:1px solid #e4e4e4;
+            font-size: 0.28rem;
+        }
+        .main>.sex_require{
+            position: relative;
+        }
+        .main>.sex_require>a{
+       /*     position: absolute;*/
+            width: 65%;
+            display: inline-block;
+            text-align: center;
+            font-size: 0.28rem;
+            color:#666;
+        }
+        /*颜色的更改*/
+        .android-ics .dwv{
+            color:#f0ad4e;
+            border-bottom: 2px solid #f0ad4e;
+        }
+        .dwl {
+            color: #f0ad4e;
+        }
+        .android-ics .dw .dwwol{
+            border-bottom: 2px solid #f0ad4e;
+            border-top: 2px solid #f0ad4e;
+        }
+        .area>div{
+            width: 65%;
+            display: inline-block;
+            text-align: center;
+            color:#666;
+        }
+        /*address*/
+        ._citys {width:100%; height:100%;display: inline-block; position: relative; }
+        ._citys span { color: #f0ae4e; height: 15px; width: 15px; line-height: 15px; text-align: center; border-radius: 3px; position: absolute; right: 1em; top: 10px; border: 1px solid #f0ae4e; cursor: pointer; }
+        ._citys0 { width: 100%; height: 34px; display: inline-block; border-bottom: 2px solid #f0ae4e; padding: 0; margin: 0; background-color: #fff;}
+        ._citys0 li { float:left; height:34px;line-height: 34px;overflow:hidden; font-size: 15px; color: #888; width: 80px; text-align: center; cursor: pointer; }
+        .citySel { background-color: #f0ae4e; color: #fff !important; }
+        ._citys1 { width: 100%;height:80%; display: inline-block; padding: 10px 0; overflow: auto;
+            background-color: #fff;}
+        ._citys1 a {  height: 35px; display: block; color: #666; padding-left: 6px; margin-top: 3px; line-height: 35px; cursor: pointer; font-size: 13px; overflow: hidden;
+        }
+        ._citys1 a:hover { color: #fff; background-color: #56b4f8; }
+        #PoPy{
+            z-index: 1111;
+        }
+        ._citys{
+            background-color: #fff;
+        }
+        #result{
+            width: 65%;
+            display: inline-block;
+            line-height: 0.8rem;
+        }
+        .mui-btn-block{
+            padding: 0;
+            margin-bottom: 0;
+        }
+        #demo1{
+            padding-top: 0.1rem;
+        }
+        .layer>header{
+            height: 1.6rem;
+        }
+        .layer>header>h3{
+            line-height: 1.2rem;
+        }
+        .mui-btn-blue, .mui-btn-primary, input[type=submit]{
+            border: 1px solid #f0ad4e;
+            background-color: #f0ad4e;
+        }
+    </style>
+</head>
+<body>
+<div class="layer">
+    <header>
+        <i onclick="back()"></i>
+        <h3>个人资料</h3>
+        <em class="save()">保存</em>
+    </header>
+    <div class="main">
+       <div class="header">
+           <span>简历头像</span>
+           <img src="../../img/focus-img1.png" alt="" onclick="location.href='head.html'"/>
+       </div>
+        <div class="real_name">
+            <span>真实姓名</span>
+            <input type="text" placeholder="请填写您的真实姓名"/>
+        </div>
+        <div class="nick_name">
+            <span>昵称</span>
+            <input type="text" placeholder="请设置您的昵称"/>
+        </div>
+        <div class="sex sex_require">
+            <span>性别</span>
+            <a href="#middlePopover">选择性别</a>
+            <div id="middlePopover" class="mui-popover">
+                <div class="mui-card">
+                    <ul class="mui-table-view mui-table-view-radio sex_choose">
+                        <li class="mui-table-view-cell">
+                            <a class="mui-navigate-right">
+                                男
+                            </a>
+                        </li>
+                        <li class="mui-table-view-cell">
+                            <a class="mui-navigate-right">
+                                女
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="birthday" id="birthday">
+            <span>生日</span>
+            <!--<input value="点击选择您的生日" class="birthday" readonly="" name="appDate1" id="appDate1" type="text">
+-->
+            <input id='demo1' data-options='{"type":"date"}' placeholder="点击选择您的生日" class="btn mui-btn mui-btn-block forInschool">
+            <div id='result' class="ui-alert"  ></div>
+        </div>
+        <div class="high">
+            <span>身高</span>
+            <input type="text" placeholder="请输入您的身高"/>
+        </div>
+
+        <div class="school">
+            <span>毕业学校</span>
+            <input type="text" placeholder="请输入您的毕业院校"/>
+        </div>
+        <div class="area">
+            <span>所在地区</span>
+            <div id="city" class="address"> 请选择您的所在地区</div>
+        </div>
+        <div class="des">
+            <span>个人评价</span>
+            <textarea placeholder="请描述您的教育经历、个人特长、自我评价、获得的奖励、工作经历等"></textarea>
+        </div>
+
+    </div>
+</div>
+</body>
+<script src="../../js/common/x_rem.js"></script>
+<script src="../../js/common/mui.min.js"></script>
+<script src="../../js/common/base.js"></script>
+<script src="../../js/common/back.js"></script>
+<script src="../../js/common/fastclick.js"></script>
+<script src="../../js/common/sweetalert2.js"></script>
+<script src="../../js/common/address/common.js"></script>
+<script src="../../js/common/address/popt.js"></script>
+<script src="../../js/common/address/cityjson.js"></script>
+<script src="../../js/common/address/cityset.js"></script>
+<script src="../../js/common/mui.picker.min.js"></script>
+<script src="../../js/common/datepicker.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+
+        /*地区选择*/
+        $("#city").click(function (e) {
+            SelCity(this,e);
+            /* console.log(this);*/
+        });
+        /*性别选择*/
+        document.querySelector('.mui-table-view.sex_choose').addEventListener('selected',function(e1){
+            window.event? window.event.cancelBubble = true : e.stopPropagation();
+            console.log("性别为：" + e1.detail.el.innerText);
+            document.querySelector(".sex_require>a").innerText= e1.detail.el.innerText;
+            document.querySelector("#middlePopover").style.display="none";
+            document.querySelector(".mui-backdrop").style.display="none";
+            /* alert(1);*/
+        });
+        //trim 去掉空格
+        //时间戳转换
+
+
+    })
+</script>
+<!--mui时间 -->
+<script>
+    (function($) {
+        $.init();
+        var result = $('#result')[0];
+        var btns = $('.btn');
+        btns.each(function(i, btn) {
+            btn.addEventListener('tap', function() {
+                var optionsJson = this.getAttribute('data-options') || '{}';
+                var options = JSON.parse(optionsJson);
+                var id = this.getAttribute('id');
+                /*
+                 * 首次显示时实例化组件
+                 * 示例为了简洁，将 options 放在了按钮的 dom 上
+                 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+                 */
+                var picker = new $.DtPicker(options);
+                picker.show(function(rs) {
+                    /*
+                     * rs.value 拼合后的 value
+                     * rs.text 拼合后的 text
+                     * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+                     * rs.m 月，用法同年
+                     * rs.d 日，用法同年
+                     * rs.h 时，用法同年
+                     * rs.i 分（minutes 的第二个字母），用法同年
+                     */
+                    var demo1=document.querySelector("#demo1");
+                    demo1.value=rs.text;
+                    //result.innerText = '选择结果: ' + rs.text;
+                    /*
+                     * 返回 false 可以阻止选择框的关闭
+                     * return false;
+                     */
+                    /*
+                     * 释放组件资源，释放后将将不能再操作组件
+                     * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+                     * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+                     * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+                     */
+                    picker.dispose();
+                });
+            }, false);
+        });
+    })(mui);
+</script>
+
+</html>

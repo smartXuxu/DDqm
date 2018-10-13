@@ -1,0 +1,56 @@
+html{
+    background-color: #eeeeee;
+}
+.main_list{
+    width: 100%;
+    padding-top: 1.8rem;
+}
+.main_list>.list{
+    width: 100%;
+    padding: 0.3rem;
+    position: relative;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+}
+.main_list>.list:last-of-type{
+    border-bottom: none;
+}
+.main_list>.list>img{
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+.main_list>.list>.center{
+    position: absolute;
+    left: 1.6rem;
+    top: 20%;
+
+}
+.list>.center>em{
+    display: block;
+    color:#333;
+    font-size: 0.36rem;
+}
+.list>.center>del{
+    font-size: 0.24rem;
+    color: #666666;
+}
+.list>.right{
+    position: absolute;
+    right: 5%;
+    top: 30%;
+    padding: 0.1rem;
+    border-radius: 5px;
+    color: #ffffff;
+    min-width: 20%;
+    text-align: center;
+    font-size: 0.3rem;
+}
+.list>.right.quit{
+    background-color: #dcdcdc;
+
+}
+.list>.right.response{
+    background-color:#f1ae4d;
+}

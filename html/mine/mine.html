@@ -14,33 +14,36 @@
 <div class="layer">
 <header>
     <div class="operation">
-        <em></em>
+        <em onclick="location.href='./message.html'"></em>
         <i></i>
     </div>
     <div class="content">
         <img src="../../img/focus-img1.png" alt=""/>
-        <h3>白雪</h3>
-        <p>未认证</p>
-        <h4>认证信息</h4>
+        <div class="content_main" onclick="location.href='./mine_authentication.html'">
+            <h3>白雪</h3>
+            <p>未认证</p>
+            <h4>认证信息</h4>
+        </div>
+
     </div>
 </header>
     <div class="main">
         <ul class="content_main">
-            <li class="mine_data">
+            <li class="mine_data" onclick="location.href='./mine_data.html'">
                 <em></em>
                 <div>
                     <span>个人资料</span>
                     <i class="mui-icon mui-icon-arrowright"></i>
                 </div>
             </li>
-            <li class="mine_account">
+            <li class="mine_account" onclick="location.href='mine_account.html'">
                 <em></em>
                 <div>
                     <span>账户管理</span>
                     <i class="mui-icon mui-icon-arrowright"></i>
                 </div>
             </li>
-            <li class="mine_order">
+            <li class="mine_order" onclick="location.href='mine_order.html'">
                 <em></em>
                 <div>
                     <span>订单管理</span>
@@ -84,9 +87,10 @@
 </div>
 </body>
 <script src="../../js/common/x_rem.js"></script>
-<script src="../../js/common/zepto.min.js"></script>
+<script src="../../js/common/jquery.min.js"></script>
+<!--<script src="../../js/common/zepto.min.js"></script>
 <script src="../../js/common/selector.js"></script>
-<script src="../../js/common/touch.js"></script>
+<script src="../../js/common/touch.js"></script>-->
 <script src="../../js/common/mui.min.js"></script>
 <script src="../../js/common/base.js"></script>
 <script>

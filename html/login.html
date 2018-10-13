@@ -48,9 +48,10 @@
 </div>
 
 <script src="../js/common/x_rem.js"></script>
-<script src="../js/common/zepto.min.js"></script>
+<script src="../js/common/jquery.min.js"></script>
+<!--<script src="../js/common/zepto.min.js"></script>
 <script src="../js/common/touch.js"></script>
-<script src="../js/common/selector.js"></script>
+<script src="../js/common/selector.js"></script>-->
 <script src="../js/common/base.js"></script>
 <script src="../js/common/back.js"></script>
 <script src="../js/common/sweetalert2.js"></script>
@@ -64,7 +65,7 @@
 
     //点击小眼睛 改变input的状态
     var flag=true;
-    $(".eye").tap(function(){
+    $(".eye").click(function(){
         if(flag){
             $(".password input[type='password']").attr("type","text");
             $(this).css("background-image","url(../img/close_eyes1.png)");
@@ -164,16 +165,16 @@
     }
 
     /*点击的登录 调用此函数  */
-    $(".login_Button").tap(function(){
+    $(".login_Button").click(function(){
         login();
 
     });
     //点击注册 跳转到注册界面
-    $(".register_Button").tap(function(){
+    $(".register_Button").click(function(){
         window.location.href="./register.html";
     });
     //点击忘记密码
-    $(".forget_password").tap(function () {
+    $(".forget_password").click(function () {
         window.location.href="./findPassword.html";
     });
     //验证不为空

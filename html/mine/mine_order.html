@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>订单管理</title>
+    <link rel="stylesheet" href="../../css/base.css"/>
+    <link rel="stylesheet" href="../../css/header.css"/>
+    <link rel="stylesheet" href="../../css/mine/mine_order.css"/>
+</head>
+<body>
+<div class="layer">
+    <header>
+        <i onclick="location.href='./mine.html'"></i>
+        <h3>订单管理</h3>
+    </header>
+    <div class="main">
+        <nav>
+            <ul class="clearfix">
+                <li class="active">
+                    <span>接受的订单</span>
+                </li>
+                <li onclick="location.href='./mine_order_mySend.html'">
+                    <span>发布的订单</span>
+                </li>
+            </ul>
+        </nav>
+        <div class="lists">
+            <div class="list clearfix">
+               <div class="left f_left" onclick="location.href='./Order_details.html'">
+                   <h3>家务打扫</h3>
+                   <p class="center">
+                       <em>郑州新区</em>
+                       <i>2018 10-13 15:16</i>
+                   </p>
+
+                   <ul class="list_b">
+                       三种状态
+                       <li>. 已报名</li>
+                       <li>. 未处理</li>
+                       <li>. 简历被查看</li>
+                       <li>. 录用成功</li>
+                       <li>. 拒绝录用</li>
+                   </ul>
+               </div>
+                <div class="right f_right">
+                    <em onclick="location.href='../index/chat.html'"></em>
+                <span>取消订单</span>
+                    <!--成功可以取消 未处理也可取消 被拒绝不能取消-->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../../js/common/x_rem.js"></script>
+<script src="../../js/common/jquery.min.js"></script>
+<!--<script src="../../js/common/zepto.min.js"></script>
+<script src="../../js/common/selector.js"></script>
+<script src="../../js/common/touch.js"></script>-->
+<script src="../../js/common/base.js"></script>
+<script src="../../js/common/back.js"></script>
+</html>

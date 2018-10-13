@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
 
-    <title>健康证认证</title>
+    <title>实名认证</title>
     <link rel="stylesheet" href="../../css/base.css"/>
     <link rel="stylesheet" href="../../css/header.css"/>
     <link rel="stylesheet" href="../../css/sweetalert2.css"/>
@@ -21,7 +21,7 @@
             text-align: center;
 
         }
-       .open>.open_box{
+        .open>.open_box{
             background:url("../../img/my_hel_card.png") no-repeat center;
             -webkit-background-size: 80%;
             background-size: 80%;
@@ -29,10 +29,10 @@
             margin-left: 0.2rem;
             border: 1px solid #000;
             border-radius:10px;
-           margin-bottom: 0.2rem;
+            margin-bottom: 0.2rem;
         }
 
-         .open input{
+        .open input{
             display: block;
             height: 100%;
             width: 100%;
@@ -40,7 +40,7 @@
             border: none;
         }
         .open>em{
-         color:#707070;
+            color:#707070;
             font-size: 0.3rem;
         }
         .open>p{
@@ -62,6 +62,26 @@
             border-radius: 15px;
             margin-top: 1rem;
         }
+        .form{
+            padding-left: 0.4rem;
+        }
+        .name,.idCard{
+            position: relative;
+            height: 1rem;
+            line-height: 1rem;
+            font-size: 0.3rem;
+            border-bottom: 1px solid #eeeeee;
+        }
+        .name>input,.idCard>input{
+            position: absolute;
+            right: 3%;
+            top: 10%;
+            width: 70%;
+            height: 0.8rem;
+            line-height: 0.8rem;
+            text-align: right;
+
+        }
     </style>
 
 </head>
@@ -69,7 +89,7 @@
 <div class="layer">
     <header>
         <i onclick="back()"></i>
-        <h3>健康证认证</h3>
+        <h3>实名认证</h3>
     </header>
     <div class="main">
         <div class="open">
@@ -77,9 +97,21 @@
                 <input type="file" id="just" accept="image/*" capture="camera"/>
             </div>
             <em>上传证件</em>
-            <p>请上传健康证正面照片</p>
+            <p>请上传身份证照片面</p>
+        </div>
+
+    </div>
+    <div class="form">
+        <div class="name">
+            <span>姓名</span>
+            <input type="text" placeholder="请输入姓名"/>
+        </div>
+        <div class="idCard">
+            <span>证件号码</span>
+            <input type="text" placeholder="请输入证件号码"/>
         </div>
     </div>
+
     <button class="begin_path">立即认证</button>
 </div>
 </body>
@@ -93,42 +125,42 @@
 <script src="../../js/common/back.js"></script>
 <script src="../../js/common/sweetalert2.js"></script>
 <script>
-$(function () {
-    document.querySelector("#just").onchange=function () {
-        var file=document.querySelector("#just").files;
+    $(function () {
+        document.querySelector("#just").onchange=function () {
+            var file=document.querySelector("#just").files;
 
-        html5Reader(file,".open_box");
-        // console.log(base64IdCardFront);
-    }
-    function html5Reader(file,ele){
-        //var file = file.files[0];
-        var reader = new FileReader();
-        // reader.readAsDataURL(file);
-        reader.readAsDataURL(file[0]);
-        reader.onload = function(e){
-            var pic = document.querySelector(ele);
-            pic.style.backgroundImage="url("+reader.result+")";
-            var des=reader.result;
-            // console.log(des);
+            html5Reader(file,".open_box");
+            // console.log(base64IdCardFront);
         }
-    }
+        function html5Reader(file,ele){
+            //var file = file.files[0];
+            var reader = new FileReader();
+            // reader.readAsDataURL(file);
+            reader.readAsDataURL(file[0]);
+            reader.onload = function(e){
+                var pic = document.querySelector(ele);
+                pic.style.backgroundImage="url("+reader.result+")";
+                var des=reader.result;
+                // console.log(des);
+            }
+        }
 
-$(".begin_path").click(function () {
-    var base64IdCardBack=$(".open_box").css("background-image").replace('url(','').replace(')','');
-    //var base64IdCardBack=$(".open_box").css('backgroundImage').replace('url(','').replace(')','');
-    console.log(base64IdCardBack);
-    if(base64IdCardBack.replace(/\"/g,"") =="http://localhost:63342/DD/img/my_hel_card.png"){
-        sweetAlert(
-                'sorry',
-                '您还没有上传图片喔！',
-                'error'
-        )
-        base64IdCardBack="";
-    }else{
-        base64IdCardBack=base64IdCardBack;
-    }
-})
+        $(".begin_path").click(function () {
+            var base64IdCardBack=$(".open_box").css("background-image").replace('url(','').replace(')','');
+            //var base64IdCardBack=$(".open_box").css('backgroundImage').replace('url(','').replace(')','');
+            console.log(base64IdCardBack);
+            if(base64IdCardBack.replace(/\"/g,"") =="http://localhost:63342/DD/img/my_hel_card.png"){
+                sweetAlert(
+                        'sorry',
+                        '您还没有上传图片喔！',
+                        'error'
+                )
+                base64IdCardBack="";
+            }else{
+                base64IdCardBack=base64IdCardBack;
+            }
+        })
 
-})
+    })
 </script>
 </html>

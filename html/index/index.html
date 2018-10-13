@@ -167,14 +167,17 @@
 </div>
 </body>
 <script src="../../js/common/x_rem.js"></script>
-<script src="../../js/common/zepto.min.js"></script>
+<!--<script src="../../js/common/zepto.min.js"></script>
 <script src="../../js/common/selector.js"></script>
-<script src="../../js/common/touch.js"></script>
+<script src="../../js/common/touch.js"></script>-->
+<script src="../../js/common/jquery.min.js"></script>
+<script src="../../js/common/fastclick.js"></script>
 <script src="../../js/common/mui.min.js"></script>
 <script src="../../js/common/base.js"></script>
 
 <script>
     $(function(){
+        FastClick.attach(document.body);
         mui.init({
             swipeBack:true //启用右滑关闭功能
         });
@@ -187,7 +190,7 @@
             location.href='search.html';
         });
         var flag=true;
-            $(".choose_list>ul>li").tap(function () {
+            $(".choose_list>ul>li").click(function () {
                 if(flag){
                     $(this).children().show();
                    // console.log($(this));
@@ -204,7 +207,7 @@
                     flag = true;
                 }
             })
-        $(".choose_list>ul>li li").tap(function () {
+        $(".choose_list>ul>li li").click(function () {
            // alert(1);
         })
     })

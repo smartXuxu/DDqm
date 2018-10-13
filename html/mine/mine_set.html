@@ -120,20 +120,22 @@
 </div>
 </body>
 <script src="../../js/common/x_rem.js"></script>
-<script src="../../js/common/zepto.min.js"></script>
-<script src="../../js/common/selector.js"></script>
+<script src="../../js/common/jquery.min.js"></script>
+
+<!--<script src="../../js/common/zepto.min.js"></script>
+<script src="../../js/common/selector.js"></script>-->
 <script src="../../js/common/mui.min.js"></script>
-<script src="../../js/common/touch.js"></script>
+
 <script src="../../js/common/base.js"></script>
 <script src="../../js/common/back.js"></script>
 <script>
     $(function () {
 
         mui('body').on('tap','a',function(){document.location.href=this.href;});
-        $(".del").tap(function () {
+        $(".del").click(function () {
             $("textarea").val("");
         });
-        $(".quit_login").tap(function () {
+        $(".quit_login").click(function () {
             localStorage.removeItem("pwd");
             location.href='../login.html';
         })

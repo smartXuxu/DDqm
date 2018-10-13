@@ -95,3 +95,24 @@
     color:#fff;
     background-color: #e8a94e;
 }
+.main>.quit_order{
+    margin-top: 0.5rem;
+    position: relative;
+    bottom: 10%;
+    height: 1rem;
+    line-height: 1rem;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #f0a30a;
+    color:#fff;
+    text-align: center;
+    width: 95%;
+    left: 2%;
+
+}
+.list_b{
+    color:#f1ae4d;
+    font-size: 0.26rem;
+    border-bottom: 0.1rem solid #eeeeee;
+}

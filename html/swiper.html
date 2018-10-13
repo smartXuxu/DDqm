@@ -57,8 +57,9 @@
     </div>
 </div>
 <script src="../js/common/mui.min.js"></script>
-<script src="../js/common/zepto.min.js"></script>
-<script src="../js/common/touch.js"></script>
+<script src="../js/common/jquery.min.js"></script>
+<!--<script src="../js/common/zepto.min.js"></script>
+<script src="../js/common/touch.js"></script>-->
 <script type="text/javascript" charset="utf-8">
     (function($, doc) {
         $.init();
@@ -94,7 +95,7 @@
     gallery.slider({
         interval:0//自动轮播周期，若为0则不自动播放，默认为0；
     });
-    $("#start").tap(function(){
+    $("#start").click(function(){
         localStorage.setItem("start",5);
         location.href="login.html";
     })
