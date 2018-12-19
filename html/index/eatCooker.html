@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/mui.min.css">
     <link rel="stylesheet" href="../../css/index/index.css">
     <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/sweetalert2.css">
     <style>
         .layer>header{
             height: 1.6rem;
@@ -34,24 +35,24 @@
                 <li>
                     <a  href="javascript:;">发布时间 <del class="mui-icon mui-icon-arrowdown"></del></a>
                     <ul class="nearTime">
-                        <li>最近三天</li>
-                        <li>最近半月</li>
-                        <li>最近一月</li>
+                        <li data-mouth="3">最近三天</li>
+                        <li data-mouth="15">最近半月</li>
+                        <li data-mouth="30">最近一月</li>
                     </ul>
                 </li>
                 <li><a  href="javascript:;">离我最近</a></li>
                 <li>
                     <a href="javascript:;">性别 <del class="mui-icon mui-icon-arrowdown"></del></a>
                     <ul class="sex">
-                        <li>全部</li>
-                        <li>男生可做</li>
-                        <li>女生可做</li>
+                        <li data-sex="全部">全部</li>
+                        <li data-sex="男">男生可做</li>
+                        <li data-sex="女">女生可做</li>
                     </ul>
                 </li>
             </ul>
         </div>
         <div class="lists">
-            <div class="list clearfix" onclick="location.href='./job_detail.html'">
+           <!-- <div class="list clearfix" onclick="location.href='./job_detail.html'">
                 <img src="../../img/eatCooker.png" alt=""/>
                 <div class="center clearfix">
                     <em>四川口味饭四川口味饭四川口味饭四川口味饭</em>
@@ -74,7 +75,7 @@
                     <del>￥20/次&nbsp;&nbsp;&nbsp;&nbsp; <i>金水区</i></del>
                 </div>
                 <div class="right">已健康认证</div>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>
@@ -89,9 +90,41 @@
 <script src="../../js/common/base.js"></script>
 <script src="../../js/common/back.js"></script>
 <script src="../../js/common/fastclick.js"></script>
+<script src="../../js/common/template-web.js"></script>
+<script src="../../js/common/template.js"></script>
+<script id="detail" type="text/html">
+    {{if data==null||data.length==0}}
+    <div class="no_info">对不起，暂时没有数据</div>
+    {{else}}
+    {{each data as value i}}
+    <div class="list clearfix" onclick="location.href='./job_detail.html?url={{value.jobId}}'">
+        <img src="{{value.user.avatar==null?'../../img/eatCooker.png':value.user.avatar}}" onerror="this.src='../../img/eatCooker.png'" alt=""/>
+        <div class="center clearfix">
+            <em>{{value.workType}}{{value.introduce}}</em>
+            <del>￥{{value.priceType}}&nbsp;&nbsp;&nbsp;&nbsp; <i>{{value.address}}</i></del>
+        </div>
+        <div class="right">已健康认证</div>
+    </div>
+    {{/each}}
+    {{/if}}
+</script>
 <script>
     $(function () {
         FastClick.attach(document.body);
+
+        var city="郑州";
+        if(localStorage.getItem("city")){
+            city=localStorage.getItem("city");
+        }
+        var workerType="做饭";
+        function render(data){
+            console.log(data);
+            if(data.code==200){
+                $(".lists").html(template("detail",data))
+            }
+        }
+        myAjax({url:"/job/searchByCityAndWorkType/"+city+"/"+workerType,async:false},render);
+
         var flag=true;
         $(".choose_list>ul>li").click(function () {
             if(flag){
@@ -101,6 +134,17 @@
                 $(this).siblings().find("a").removeClass("active");
                 $(this).find("del").removeClass("mui-icon-arrowdown");
                 $(this).find("del").addClass("mui-icon-arrowup");
+                if($(this).find("a").text()=="离我最近"){
+                    //console.log($(this).find("a").text());
+                    function render(data){
+                        console.log(data);
+                        data.data=data.data.reverse();
+                        if(data.code==200){
+                            $(".lists").html(template("detail",data))
+                        }
+                    }
+                    myAjax({url:"/job/searchByCityAndWorkType/"+city+"/"+workerType,async:false},render);
+                }
                 flag=false;
             }else{
                 $(this).children("ul").hide();
@@ -112,7 +156,26 @@
         })
         $(".choose_list>ul>li li").click(function () {
             // alert(1);
+            var text=$(this).data();
+            console.log(text);
+            if(text.sex){
+                //console.log("sex");
+                var sex=$(this).data("sex");
+                //console.log(sex);
+                getOther({sex:sex,city:city,workType:workerType});
+            }else{
+                //console.log("mouth");
+                var ntervalMouth=$(this).data("mouth");
+                getOther({ntervalMouth:ntervalMouth,city:city,workType:workerType});
+                console.log(ntervalMouth);
+            }
+
         })
+
+        // /job/searchByCityAndOthers
+        function getOther(data){
+            myAjax({url:"/job/searchByCityAndOthers",data:data,type:"get",async:false},render)
+        }
     })
 </script>
 </html>

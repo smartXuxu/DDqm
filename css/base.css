@@ -231,3 +231,9 @@ address,caption,cite,code,dfn,em,th{
     margin-top: 0.2rem;
     transform: translateX(-18%);
 }
+.no_info{
+    color:#999;
+    padding-left: 0.3rem;
+    font-size: 0.3rem;
+    padding-top: 0.5rem;
+}

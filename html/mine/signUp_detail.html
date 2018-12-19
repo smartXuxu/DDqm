@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-
     <title>报名详情</title>
     <link rel="stylesheet" href="../../css/base.css"/>
     <link rel="stylesheet" href="../../css/header.css"/>
+    <link rel="stylesheet" href="../../css/sweetalert2.css"/>
     <link rel="stylesheet" href="../../css/mine/sign_up_detail.css"/>
 </head>
 <body>
@@ -17,7 +17,7 @@
         <h3>报名详情</h3>
     </header>
     <div class="main_list">
-    <div class="list" onclick="location.href='singUp_data.html'">
+    <!--<div class="list" onclick="location.href='singUp_data.html'">
         <img src="../../img/focus-img1.png" alt=""/>
         <div class="center">
             <em>七月的雪</em>
@@ -32,7 +32,7 @@
             <del>今天09:23</del>
         </div>
         <div class="right quit">已拒绝订单</div>
-    </div>
+    </div>-->
     </div>
 </div>
 </body>
@@ -43,4 +43,62 @@
 <script src="../../js/common/touch.js"></script>-->
 <script src="../../js/common/base.js"></script>
 <script src="../../js/common/back.js"></script>
+<script src="../../js/common/sweetalert2.js"></script>
+<script src="../../js/common/template-web.js"></script>
+<script src="../../js/common/template.js"></script>
+<script id="detail" type="text/html">
+{{if data==null||data.length==0}}
+<div class="no_info">对不起、暂时没有人报名</div>
+{{else}}
+{{each data as value i}}
+<div class="list" onclick="location.href='singUp_data.html?url={{value.jobOrderId}}'">
+
+    <img src="{{value.user.avatar==null?'../../img/focus-img1.png':value.user.avatar}}" alt="" onerror="this.src='../../img/focus-img1.png'"/>
+    <div class="center">
+        <em>{{value.user.nickName==null?value.user.userName==null?'咚咚敲门':value.user.userName:value.user.nickName}}</em>
+        <del>{{time(value.createTime)}}</del>
+    </div>
+    {{if value.status==1}}
+    <div class="right response">已同意</div>
+    {{else if value.status==0}}
+    <div class="right response not_sure">待确定</div>
+    {{else if value.status==3}}
+    <div class="right response not_sure">订单被取消</div>
+    {{else if value.status==2}}
+    <div class="right response reject">已拒绝</div>
+    {{else if value.status==4}}
+    <div class="right response">等待支付</div>
+    {{else if value.status==5||value.status==6}}
+    <div class="right response ">支付完成</div>
+    {{/if}}
+</div>
+{{/each}}
+    {{/if}}
+</script>
+
+<script>
+    $(function () {
+        function render(data){
+            console.log(data);
+            if(data.code==200){
+                template.helper("time",function(date){
+                    var time=new Date(date).toLocaleString().replace(/:\d{1,2}$/,' ').replace(/\//g,"-");
+                    return time;
+                });
+                $(".main_list").html(template("detail",data))
+            }else{
+                sweetAlert(
+                        "sorry",
+                        data.msg,
+                        "error"
+                ).then(function () {
+                            back()
+                        })
+            }
+        }
+        var id=location.href.split("=")[1];
+        //myAjax({url:"/job/getPushJobOrderByGroup",data:{},type:"get",async:false},render)
+      myAjax({url:"/job/getPushJobOrderByJobId/"+id,type:"get",async:false},render);
+    })
+</script>
 </html>

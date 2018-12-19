@@ -7,6 +7,7 @@
     <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" href="../../css/head/cropper.min.css">
     <link rel="stylesheet" href="../../css/head/imgcropping.css">
+    <link rel="stylesheet" href="../../css/sweetalert2.css">
 
     <style>
         header{
@@ -69,7 +70,7 @@
     <h3>上传头像</h3>
     <em class="confirm">确定</em>
 </header>
-<div style="height: 320px;padding: 20px;padding-left:10px;margin-top: 10px" class="getPic" id="replaceImg">
+<div style="height: 320px;padding: 20px 0px;padding-left:15%;margin: 10px auto" class="getPic" id="replaceImg">
 <!--头像存放处-->
     <img id="finalImg" src="../../img/focus-img1.png"  style="border-radius: 50%;">
 </div>
@@ -107,14 +108,15 @@
 
 <script type="text/javascript" src="../../js/common/jquery.min.js"></script>
 <script type="text/javascript" src="../../js/common/base.js"></script>
+<script type="text/javascript" src="../../js/common/sweetalert2.js"></script>
 <script src="../../js/common/back.js"></script>
 <script type="text/javascript" src="../../js/common/head/cropper.min.js"></script>
 <script type="text/javascript" src="../../js/common/template-web.js"></script>
 <script id="getPic" type="text/html">
-    {{if message=="" || !message}}
-    <img id="finalImg" src="../img/focus-img1.png"  style="border-radius: 50%;">
+    {{if data.avatar==null || !data.avatar}}
+    <img id="finalImg" src="../../img/focus-img1.png"  style="border-radius: 50%;">
     {{else}}
-    <img id="finalImg" src="{{message}}" style="border-radius: 50%;">
+    <img id="finalImg" src="{{data.avatar}}" onerror="this.src='../../img/focus-img1.png'" style="border-radius: 50%;">
     {{/if}}
 </script>
 <script type="text/javascript">
@@ -233,31 +235,56 @@
     function closeTailor() {
         $(".tailoring-container").toggle();
     }
-
     //更换头像，发送base64给后台
     $(".confirm").on("click",function () {
-        var headePIc=$("#finalImg").attr('src');
-        //sendHeadpic(headePIc);
-    })
+        var headePIc=$("#finalImg").attr('src').replace(/"/g,"");
+       sendHeadpic(headePIc);
+    });
+    var url=location.href.split("=")[1];
     function sendHeadpic(headpicPath){
         $.ajax({
             xhrFields: {
                 withCredentials: true
             },
             type: "post",
-            url:baseUrl+"/student/updateAvatar",
+            url:baseUrl+"/user/uploadOrUpdateAvatar",
             data:{
-                image:headpicPath
+                avatarImage:headpicPath
             },
             dataType: 'json',
             success:function(data){
                 console.log(data);
-                if(data.code=="success"){
-                   back();
+                if(data.code==200){
+                    sweetAlert(
+                            "恭喜您",
+                            data.msg,
+                            "success"
+                    ).then(function () {
+                                if(url){
+                                    location.href='./mine_data.html';
+                                }else{
+                                    location.href='./mine.html';
+                                }
+
+                            })
+                }else{
+                    sweetAlert(
+                            "sorry",
+                            data.msg,
+                            "error"
+                    )
                 }
             },
             error:function(data){
                 console.log(data);
+                sweetAlert(
+                        "sorry",
+                        data.msg,
+                        "error"
+                ).then(function () {
+                          location.href='../login.html'
+                        })
+
             }
         })
     }
@@ -267,9 +294,9 @@
             xhrFields: {
                 withCredentials: true
             },
-            type: "post",
+            type: "get",
             async: false,
-            url: baseUrl+"/student/findAvatar",
+            url: baseUrl+"/user/getCurrentUserMessage",
 
             dataType: 'json',
             success:function(data){
@@ -282,7 +309,7 @@
             }
         })
     }
-    //getHeadpic()
+   getHeadpic()
 </script>
 
 </body>

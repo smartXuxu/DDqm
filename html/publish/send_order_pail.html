@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+
+    <title>搜索</title>
+    <link rel="stylesheet" href="../../css/base.css"/>
+    <link rel="stylesheet" href="../../css/sweetalert2.css"/>
+    <link rel="stylesheet" href="../../css/index/index.css"/>
+    <link rel="stylesheet" href="../../css/header.css"/>
+    <style>
+
+        .main{
+            padding-top: 1.8rem;
+        }
+
+    </style>
+</head>
+<body>
+<div class="layer select">
+    <header>
+        <i onclick="back()"></i>
+       <h3>选单结果</h3>
+    </header>
+    <div class="main">
+        <div class="lists">
+
+           <!-- <div class="list clearfix" onclick="location.href='./job_detail.html'">
+                <img src="../../img/focus-img1.png" alt=""/>
+                <div class="center clearfix">
+                    <em>四川口味饭四川口味饭四川口味饭四川口味饭</em>
+                    <del>￥20/次&nbsp;&nbsp;&nbsp;&nbsp; <i>金水区</i></del>
+                </div>
+                <div class="right">已健康认证</div>
+            </div>
+            <div class="list clearfix" onclick="location.href='./job_detail.html'">
+                <img src="../../img/eatCooker.png" alt=""/>
+                <div class="center clearfix">
+                    <em>四川口味饭四川口味饭四川口味饭四川口味饭</em>
+                    <del>￥20/次&nbsp;&nbsp;&nbsp;&nbsp; <i>金水区</i></del>
+                </div>
+                <div class="right">已健康认证</div>
+            </div>-->
+        </div>
+    </div>
+
+</div>
+</body>
+<script src="../../js/common/x_rem.js"></script>
+<script src="../../js/common/jquery.min.js"></script>
+<!--<script src="../../js/common/zepto.min.js"></script>
+<script src="../../js/common/selector.js"></script>
+<script src="../../js/common/touch.js"></script>-->
+<script src="../../js/common/sweetalert2.js"></script>
+<script src="../../js/common/base.js"></script>
+<script src="../../js/common/back.js"></script>
+<script src="../../js/common/template-web.js"></script>
+<script src="../../js/common/template.js"></script>
+<script type="text/template" id="result">
+    {{if data==null||data.length==0}}
+    <div class="no_info">对不起,暂时没有符合条件的选单结果</div>
+    {{else}}
+{{each data as value i}}
+<div class="list clearfix" onclick="location.href='../index/job_detail.html?jobId={{value.jobId}}'">
+    <img src="{{value.user.avatar==null?'../../img/eatCooker.png':value.user.avatar}}" onerror="this.src='../../img/eatCooker.png'" alt=""/>
+    <div class="center clearfix">
+        <em>{{value.workType}}{{value.introduce}}</em>
+        <del>￥{{value.priceType}}&nbsp;&nbsp;&nbsp;&nbsp; <i>{{value.address}}</i></del>
+    </div>
+    <div class="right">已健康认证</div>
+</div>
+    {{/each}}
+{{/if}}
+</script>
+<script>
+    $(function () {
+       var address=    localStorage.getItem( "address");
+        console.log(address);
+        var endTime=  localStorage.getItem( "endTime");
+         var priceType=localStorage.getItem( "priceType");
+        var startTime= localStorage.getItem( "startTime");
+        var workTime=  localStorage.getItem( "workTime");
+        var workType=  localStorage.getItem( "workType");
+        var payMethod= localStorage.getItem( "payMethod");
+        if(address==null&&endTime==null){
+            $(".lists").html(`<div class="no_info">对不起,暂时没有符合条件的选单结果</div>`);
+            return;
+        }
+        $.ajax({
+         type:"post",
+         url:baseUrl+"/job/selectJob",
+         dataType:"json",
+         xhrFields: {
+         withCredentials: true
+         },
+         data:{
+         address:address,
+         endTime:endTime,
+         priceType:priceType,
+         startTime:startTime,
+         workTime:workTime,
+         workType:workType,
+         payMethod:payMethod
+         },
+         beforeSend: function (data) {
+         //console.log(data);
+         },
+         success: function (data) {
+         console.log(data);
+             $(".lists").html(template("result",data));
+             localStorage.removeItem( "address");
+             localStorage.removeItem( "endTime")
+             localStorage.removeItem( "priceType")
+             localStorage.removeItem( "startTime")
+             localStorage.removeItem( "workTime")
+             localStorage.removeItem( "workType")
+             localStorage.removeItem( "payMethod")
+         },
+         error: function (msg) {
+         sweetAlert(
+         "sorry",
+         msg.msg,
+         "error"
+         )
+         }
+         })
+    })
+
+    /*if(address&$&& priceType&&localStorage.getItem( "startTime")&&localStorage.getItem( "workTime")&&localStorage.getItem( "workType")&&localStorage.getItem( "payMethod")){
+    }*/
+
+
+
+
+
+
+
+
+</script>
+</html>

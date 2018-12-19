@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/base.css"/>
     <link rel="stylesheet" href="../../css/footer.css"/>
     <link rel="stylesheet" href="../../css/mine/mine.css"/>
+    <link rel="stylesheet" href="../../css/sweetalert2.css"/>
 </head>
 <body>
 <div class="layer">
@@ -18,13 +19,13 @@
         <i></i>
     </div>
     <div class="content">
-        <img src="../../img/focus-img1.png" alt=""/>
+      <!--信息填充-->
+        <img src="../../img/focus-img1.png" alt="" onerror="this.src='../../img/focus-img1.png'"/>
         <div class="content_main" onclick="location.href='./mine_authentication.html'">
-            <h3>白雪</h3>
+            <h3>咚咚敲门</h3>
             <p>未认证</p>
             <h4>认证信息</h4>
         </div>
-
     </div>
 </header>
     <div class="main">
@@ -84,6 +85,11 @@
             </li>
         </ul>
     </footer>
+    <!-- {{if data.avatar==null||data.avatar=="undefined"}}
+            <img src="../../img/focus-img1.png" alt=""/>
+            {{else}}
+            <img src="{{data.avatar}}"  onerror="this.src='../../img/focus-img1.png'"/>
+            {{/if}}-->
 </div>
 </body>
 <script src="../../js/common/x_rem.js"></script>
@@ -93,9 +99,60 @@
 <script src="../../js/common/touch.js"></script>-->
 <script src="../../js/common/mui.min.js"></script>
 <script src="../../js/common/base.js"></script>
+<script src="../../js/common/sweetalert2.js"></script>
+<script src="../../js/common/template-web.js"></script>
+<script src="../../js/common/template.js"></script>
+<script type="text/html" id="mine">
+    {{if data.avatar==null||data.avatar=="undefined"}}
+    <img src="../../img/focus-img1.png" alt="" onclick="location.href='./head.html'"/>
+    {{else}}
+    <img src="{{data.avatar}}"  onerror="this.src='../../img/focus-img1.png'" onclick="location.href='./head.html'"/>
+    {{/if}}
+            <div class="content_main" onclick="location.href='./mine_authentication.html'">
+            <h3>{{data.nickName==null||data.nickName==""?data.userName==null||data.userName==""?"未设置":data.userName:data.nickName}}</h3>
+            <p>{{data.auth==false?"未认证":"已认证"}}</p>
+            <h4>认证信息</h4>
+            </div>
+</script>
 <script>
-$(function () {
+    (function($, doc) {
+        $.init();
+        $.plusReady(function() {
+            var backButtonPress = 0;
+            $.back = function(event) {
+                backButtonPress++;
+                if (backButtonPress > 1) {
+                    plus.runtime.quit();
+                } else {
+                    plus.nativeUI.toast('再按一次退出应用');
+                }
+                setTimeout(function() {
+                    backButtonPress = 0;
+                }, 1000);
+                return false;
+            };
+        });
+    }(mui, document));
+
+    $(function () {
+        isUser();
     mui('body').on('tap','a',function(){document.location.href=this.href;});
+        function render(data){
+            console.log(data);
+            if(data.code==200){
+                $("header>.content").html(template("mine",data));
+               /* if(data.avatar!==null){
+                    $(".content>img").css("src",data.avatar);
+                }*/
+            }else{
+                sweetAlert(
+                    "sorry",
+                        data.msg,
+                        "error"
+                )
+            }
+        }
+       myAjax({url:"/user/getCurrentUserMessage",data:{},type:"get",async:false},render)
 })
 </script>
 </html>

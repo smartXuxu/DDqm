@@ -7,6 +7,7 @@
     <title>订单管理</title>
     <link rel="stylesheet" href="../../css/base.css"/>
     <link rel="stylesheet" href="../../css/header.css"/>
+    <link rel="stylesheet" href="../../css/sweetalert2.css"/>
     <link rel="stylesheet" href="../../css/mine/mine_order.css"/>
 </head>
 <body>
@@ -27,6 +28,26 @@
             </ul>
         </nav>
         <div class="lists listsList">
+         <!--   <div class="list " >
+                <div class="quit_job_detail clearfix" onclick="location.href='./quit_job_detail.html'">
+                    <img src="../../img/eatCooker.png" alt=""/>
+                    <div class="center clearfix">
+                        <em>四川口味饭四川口味饭四川口味饭四川口味饭</em>
+                        <del>￥20/次&nbsp;&nbsp;&nbsp;&nbsp; <i>金水区</i></del>
+                    </div>
+                </div>
+                <div class="right" onclick="location.href='./signUp_pail.html'">支付完成</div>
+            </div>
+            <div class="list " >
+                <div class="quit_job_detail clearfix" onclick="location.href='./quit_job_detail.html'">
+                    <img src="../../img/eatCooker.png" alt=""/>
+                    <div class="center clearfix">
+                        <em>四川口味饭四川口味饭四川口味饭四川口味饭</em>
+                        <del>￥20/次&nbsp;&nbsp;&nbsp;&nbsp; <i>金水区</i></del>
+                    </div>
+                </div>
+                <div class="right" onclick="location.href='./signUp_pail.html'">待支付</div>
+            </div>
             <div class="list " >
                 <div class="quit_job_detail clearfix" onclick="location.href='./quit_job_detail.html'">
                     <img src="../../img/eatCooker.png" alt=""/>
@@ -36,10 +57,9 @@
                     </div>
                 </div>
                 <div class="right" onclick="location.href='./signUp_detail.html'">报名详情</div>
-            </div>
-
+            </div>-->
         </div>
-    </div>
+
 </div>
 </body>
 <script src="../../js/common/x_rem.js"></script>
@@ -49,4 +69,100 @@
 <script src="../../js/common/touch.js"></script>-->
 <script src="../../js/common/base.js"></script>
 <script src="../../js/common/back.js"></script>
+<script src="../../js/common/sweetalert2.js"></script>
+<script src="../../js/common/template-web.js"></script>
+<script src="../../js/common/template.js"></script>
+<!--<script id="my_send_order" type="text/html">
+    {{if data==null||data.length==0}}
+    <div class="no_info">对不起,你暂时没有发布任何的工作岗位</div>
+    {{else}}
+    {{each data as job i}}
+    {{each job as value j}}
+    <div class="list " >
+        <div class="quit_job_detail clearfix" onclick="location.href='./quit_job_detail.html?jobId={{value.job.jobId}}'">
+            <img src="{{value.job.user.avatar==null?'../../img/eatCooker.png':value.job.user.avatar}}" alt="" onerror="this.src='../../img/eatCooker.png'"/>
+            <div class="center clearfix">
+                <em>{{value.job.workType}}{{value.job.introduce}}</em>
+                <del>￥{{value.job.priceType}}&nbsp;&nbsp;&nbsp;&nbsp; <i>{{value.job.address}}</i></del>
+            </div>
+        </div>
+        {{if value.job.pushType==0}}
+        <div class="right cancel">已注销</div>
+        {{else}}
+            {{if value.status==0}}
+            <div class="right" onclick="location.href='./signUp_detail.html?url={{value.job.jobId}}'">报名详情</div>
+            {{else if value.status==5}}
+            <div class="right" onclick="location.href='./signUp_pail.html'">待支付</div>
+            {{else if value.status==6}}
+            <div class="right" onclick="location.href='./signUp_pail.html'">支付完成</div>
+            {{/if}}
+        {{/if}}
+    </div>
+    {{/each}}
+    {{/each}}
+    {{/if}}
+</script>-->
+<script id="my_send_order" type="text/html">
+    {{if data==null||data.length==0}}
+    <div class="no_info">对不起,你暂时没有发布任何的工作岗位</div>
+    {{else}}
+    {{each data as value i}}
+    <div class="list " >
+        <div class="quit_job_detail clearfix" onclick="location.href='./quit_job_detail.html?jobId={{value.jobId}}'">
+            <img src="{{value.user.avatar==null?'../../img/eatCooker.png':value.user.avatar}}" alt="" onerror="this.src='../../img/eatCooker.png'"/>
+            <div class="center clearfix">
+                <em>{{value.workType}}{{value.introduce}}</em>
+                <del>￥{{value.priceType}}&nbsp;&nbsp;&nbsp;&nbsp; <i>{{value.address}}</i></del>
+            </div>
+        </div>
+        {{if value.pushType==0}}
+        <div class="right cancel">已注销</div>
+        {{else}}
+        <div class="right" onclick="location.href='./signUp_detail.html?url={{value.jobId}}'">报名详情</div>
+        {{/if}}
+    </div>
+    {{/each}}
+    {{/if}}
+</script>
+<script>
+    $(function () {
+      /*function render(data){
+            console.log(data);
+            /!*if(data.code==200){
+$(".listsList").html(template("my_send_order",data));
+            }*!/
+        }*/
+        function render(data){
+            console.log(data);
+            if(data.code==200){
+$(".listsList").html(template("my_send_order",data));
+            }
+            else if(data.msg="暂时无人报名"){
+                sweetAlert(
+                        "sorry",
+                        "您暂时没有发布任何的工作岗位",
+                        "error"
+                )
+            }
+            else{
+                sweetAlert(
+                        "sorry",
+                        data.msg,
+                        "error"
+                ).then(function () {
+                     location.href='./mine.html'
+                        })
+            }
+        }
+       /*function render2(data){
+            console.log(data);
+           /!* if(data.code==200){
+$(".listsList").html(template("my_send_order",data));
+            }*!/
+        }*/
+      //myAjax({url:"/job/getPushJobOrderByGroup",data:{},type:"get",async:false},render);
+        myAjax({url:"/job/getPushJob",async:false},render);
+      //  myAjax({url:"/job/getPushJobOrder",async:false},render2);
+    })
+</script>
 </html>

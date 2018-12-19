@@ -7,6 +7,7 @@
     <title>订单管理</title>
     <link rel="stylesheet" href="../../css/base.css"/>
     <link rel="stylesheet" href="../../css/header.css"/>
+    <link rel="stylesheet" href="../../css/sweetalert2.css"/>
     <link rel="stylesheet" href="../../css/mine/mine_order.css"/>
 </head>
 <body>
@@ -27,7 +28,7 @@
             </ul>
         </nav>
         <div class="lists">
-            <div class="list clearfix">
+         <!--   <div class="list clearfix">
                <div class="left f_left" onclick="location.href='./Order_details.html'">
                    <h3>家务打扫</h3>
                    <p class="center">
@@ -47,10 +48,13 @@
                 <div class="right f_right">
                     <em onclick="location.href='../index/chat.html'"></em>
                 <span>取消订单</span>
-                    <!--成功可以取消 未处理也可取消 被拒绝不能取消-->
+                <span>等待支付</span>
+                <span>支付完成</span>
+                    &lt;!&ndash;成功可以取消 未处理也可取消 被拒绝不能取消&ndash;&gt;
                 </div>
 
-            </div>
+            </div>-->
+
         </div>
     </div>
 </div>
@@ -62,4 +66,84 @@
 <script src="../../js/common/touch.js"></script>-->
 <script src="../../js/common/base.js"></script>
 <script src="../../js/common/back.js"></script>
+<script src="../../js/common/sweetalert2.js"></script>
+<script src="../../js/common/template-web.js"></script>
+<script src="../../js/common/template.js"></script>
+<script id="mine_order" type="text/html">
+{{if data==null||data.length==0}}
+<div class="no_info">对不起，您暂时没有订单</div>
+{{else}}
+{{each data as value i}}
+<div class="list clearfix">
+    <div class="left f_left" onclick="location.href='./Order_details.html?url={{value.jobOrderId}}'">
+        <h3>{{value.job.workType}}</h3>
+        <p class="center">
+            <em>{{value.job.address}}</em>
+            <i>{{time(value.job.startTime)}}</i>
+        </p>
+        <ul class="list_b">
+            {{if value.status==0}}
+            <li>. 已报名</li>
+            <li>. 未处理</li>
+            {{else if value.status==1||value.status==4||value.status==5||value.status==6}}
+            <li>. 已报名</li>
+            <li>. 简历被查看</li>
+            <li>. 录用成功</li>
+            {{else if value.status==2}}
+            <li>. 已报名</li>
+            <li>. 简历被查看</li>
+            <li>. 拒绝录用</li>
+            {{else if value.status==3}}
+            <li>. 已报名</li>
+            <li>. 简历被查看</li>
+            <li>. 订单取消</li>
+            {{/if}}
+
+        </ul>
+    </div>
+    <div class="right f_right">
+        <em onclick="location.href='../index/chat.html?url={{value.job.user.mobilePhone}}'"></em>
+        {{if value.status==0||value.status==1}}
+        <span>取消订单</span>
+        {{else if value.status==3}}
+        <span class="cancel">订单已取消</span>
+        {{else if value.status==2}}
+        <span class="reject">订单被拒绝</span>
+        {{else if value.status==4}}
+        <span>等待支付</span>
+        {{else if value.status==5}}
+        <span>等待支付</span>
+        {{else if value.status==6}}
+        <span>支付完成</span>
+        {{/if}}
+        <!--成功可以取消 未处理也可取消 被拒绝不能取消-->
+    </div>
+</div>
+{{/each}}
+    {{/if}}
+</script>
+<script>
+$(function () {
+    function render(data){
+        console.log(data);
+        if(data.code==200){
+            template.helper("time",function(date){
+                var time=new Date(date).toLocaleString().replace(/:\d{1,2}$/,' ').replace(/\//g,"-").substr(0,12);
+                return time;
+                /* return new Date(parseInt(date) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');*/
+            });
+            $(".lists").html(template("mine_order",data));
+        }else{
+            sweetAlert(
+                    "sorry",
+                    "您暂时"+data.msg,
+                    "error"
+            ).then(function () {
+                        back();
+                    })
+        }
+    }
+    myAjax({url:"/job/getCurrentUserApplyJobOrder",async:false},render);
+})
+</script>
 </html>

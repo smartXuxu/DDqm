@@ -8,11 +8,20 @@ header>del{
 html{
     background-color: #eeeeee;
 }
+section{
+    position: fixed;
+    top:1.8rem;
+    bottom: 1.1rem;
+    left: 0;
+    overflow-y: scroll;
+}
 .main{
     width: 100%;
     height:auto ;
     padding: 0.3rem;
+/*
     padding-top: 2rem;
+    padding-bottom: 1.2rem;*/
 }
 .main>.left:first-of-type{
     margin-top: 0.3rem;

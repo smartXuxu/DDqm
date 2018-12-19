@@ -62,7 +62,7 @@
 
     <div class="content">
         <ul>
-
+<!--
             <li>
                 <div class="left">
                     <i>二手买卖</i>
@@ -107,7 +107,7 @@
                 <div class="right">
                     -25.90
                 </div>
-            </li>
+            </li>-->
         </ul>
     </div>
 </div>
@@ -122,34 +122,25 @@
 <script src="../../js/common/template-web.js"></script>
 <script src="../../js/common/template.js"></script>
 <script id="my_detail" type="text/html">
-    {{if list.length==0}}
+    {{if data.length==0}}
     <li class="no_record">对不起，您暂时没有任何交易的记录</li>
     {{else}}
-{{each list as value i}}
-<li>
-    <div class="left">
-        {{if value.transactionType==1}}
-        <i>支出</i>
-        {{else if value.transactionType==2}}
-        <i>收入</i>
-        {{else if value.transactionType==3}}
-        <i>充值</i>
-        {{else}}
-        <i>提现</i>
-        {{/if}}
-        <em>{{time(value.time)}}</em>
-    </div>
-    <div class="right">
-
-       {{value.transactionType==1||value.transactionType==4?"-":"+"}} {{value.price}}
-    </div>
-</li>
-{{/each}}
+    {{each data as value i}}
+    <li>
+        <div class="left">
+            <i>{{value.introduce}}</i>
+            <em>{{time(value.createTime)}}</em>
+        </div>
+        <div class="right">
+            {{value.type==1||value.type==3?"+":"-"}} {{value.price}}
+        </div>
+    </li>
+    {{/each}}
 {{/if}}
 </script>
 <script >
     var userId=location.href.split("=")[1];
-//render();
+render();
 function render(){
     $.ajax({
         //处理session每次不唯一问题
@@ -157,18 +148,16 @@ function render(){
             withCredentials: true
         },
         async:false,
-        type: "get",
-        url: baseUrl+"/pay/getBill",
+        type: "post",
+        url: baseUrl+"/pay/getCurrentUserBill",
         data:{
-            type:1,
-            userId:userId
         },
         dataType: 'json',
         success:function(data) {
             console.log(data);
-            if(data.code=="success"||data.state==true||data.list!=="网络出了点小问题...."){
+            if(data.code==200){
                 template.helper("time",function(date){
-                    var time=new Date(date).toLocaleString().replace(/:\d{1,2}$/,' ').substr(5,12).replace("/","-");
+                    var time=new Date(date).toLocaleString().replace(/:\d{1,2}$/,' ').substr(5,13).replace("/","-");
                     return time;
                     /* return new Date(parseInt(date) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');*/
                 });

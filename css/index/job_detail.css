@@ -8,6 +8,13 @@
     line-height: 1.2rem;
     font-size: 0.34rem;
     color:#333;
+    width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    overflow: hidden;
+
 }
 .main>div{
     display: block;
@@ -74,6 +81,7 @@
 }
 .button>button{
     width: 49.2%;
+    height: 1rem;
     padding-left: 0;
     font-size: 0.3rem;
     background-color: #fff;
@@ -109,10 +117,39 @@
     text-align: center;
     width: 95%;
     left: 2%;
+}
+.main>.quit_order.cancel_order{
+    border: 1px solid #eeeeee;
+    width: 48%;
+    left: 2%;
+    display: inline-block;
+}
+.main>.quit_order.cancel{
+    background-color: #d2d2d2;
+    color:#333;
 
+}
+.main>.sure_work{
+    display: inline-block;
+    width: 48%;
+    height: 1rem;
+    line-height: 1rem;
+    margin-left: 0.15rem;
+    background-color: #ffd238;
+    color:#999;
+
+    text-align: center;
+  
+}
+.main>.cancel{
+    background-color: #d2d2d2;
 }
 .list_b{
     color:#f1ae4d;
     font-size: 0.26rem;
+    padding-bottom: 0.2rem;
     border-bottom: 0.1rem solid #eeeeee;
+}
+.main>.pri_detail{
+    height: auto;
 }

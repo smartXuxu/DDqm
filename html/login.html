@@ -56,6 +56,7 @@
 <script src="../js/common/back.js"></script>
 <script src="../js/common/sweetalert2.js"></script>
 <script src="../js/common/mui.min.js"></script>
+<script src="../js/common/base64.min.js"></script>
 <script>
 
     //判断 本地有没有密码 和 账号 实现 记住密码的功能；
@@ -88,7 +89,7 @@
                 return false;
             }
             else {
-                obj.mobilePhone = uName;
+                obj.mobilePhone= uName;
             }
         }
         else {
@@ -105,46 +106,47 @@
         }
         //console.log(JSON.stringify(obj));
         //还需要验证数据库里面有没有这个手机号的记录需要发送ajax
-        /* $.ajax({
-         xhrFields: {
-         withCredentials: true
-         },
-         type: "post",
-         async: false,
-         url: baseUrl+"/student/mobilePhoneLogin",
-         data: obj,
-         dataType: 'json',
-         success: function (data) {
-         console.log(data);
-         /!*if (data.msg == "账号错误") {
-         alert("该账号不存在，请您查证后输入");
-         $("input").val("");
-         }else if(data.msg == "密码错误"){
-         alert("密码错误");
-         $("#pwd").val("");
-         }*!/
-         if (data.code == "success") {
-         localStorage.setItem('userId',data.userId);
-         localStorage.setItem('user', data.code);
-         //用户登录成功之后 存储用户输入的值
-         if($('#check').is(':checked')){
-         // 获取设置的本地存储的用户名的值
-         var loUser = localStorage.setItem('uName',uName);
-         // 获取设置的本地存储的密码的值
-         var loPass = localStorage.setItem('pwd',pwd);
-
-         };
-         window.location.href = "./news.html";
+         $.ajax({
+             xhrFields: {
+             withCredentials: true
+             },
+             type: "post",
+             async: false,
+             url: baseUrl+"/user/login",
+             data: obj,
+             dataType: 'json',
+             success: function (data) {
+                    console.log(data);
+                    if (data.code == "200") {
+                   /* localStorage.setItem('userId',data.userId);
+                    localStorage.setItem('user', data.code);*/
+                    //用户登录成功之后 存储用户输入的值
+                    if($('#check').is(':checked')){
+                    // 获取设置的本地存储的用户名的值
+                    var loUser = localStorage.setItem('uName',uName);
+                    // 获取设置的本地存储的密码的值 base64加密
+                        pwd=base64.tranCode.encode(pwd);
+                    var loPass = localStorage.setItem('pwd',pwd);
+             };
+         window.location.href = "./index/index.html";
          }else{
          sweetAlert(
-         '登录失败',
-         '用户名/密码错误！',
-         'error'
-         )
-         //alert("用户名/密码错误");
-         }
-         }
-         })*/
+             '登录失败',
+             data.msg,
+             'error'
+         ).then(function () {
+                     $("#pwd").val("");
+                 })
+            }
+         },
+             error: function (data) {
+                 sweetAlert(
+                         "sorry",
+                         data.msg,
+                         "error"
+                 )
+             }
+         })
 
     }
     //页面加载 渲染的时候要判断是否存在
@@ -157,10 +159,11 @@
 
         if(cusername != "" && cpassword != ""){
             $("#name").val(cusername);
-            $("#pwd").val(cpassword);
+            $("#pwd").val(base64.tranCode.decode(cpassword));
+            //$("#pwd").val(cpassword);
         }
     }
-    if(localStorage.getItem("uName")!=="" && localStorage.getItem("pwd") !==""){
+    if(localStorage.getItem("uName") && localStorage.getItem("pwd")){
         isChecked();
     }
 

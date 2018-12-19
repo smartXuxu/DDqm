@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../css/base.css"/>
     <link rel="stylesheet" href="../../css/header.css"/>
     <link rel="stylesheet" href="../../css/index/job_detail.css"/>
+    <link rel="stylesheet" href="../../css/sweetalert2.css"/>
 </head>
 <body>
 <div class="layer">
@@ -16,7 +17,8 @@
         <h3>岗位详情</h3>
     </header>
     <div class="main">
-        <h2>四川口味饭</h2>
+       <!--tianc-->
+       <!-- <h2>四川口味饭</h2>
         <div class="pri_detail">
             <em>￥20/次</em>
             <i>当天结算</i>
@@ -76,23 +78,138 @@
                 12345678912
             </div>
         </div>
-            <h3>工作描述:</h3>
+        <h3>工作描述:</h3>
         <p>空余时间可以做，有过1年做饭经验</p>
-<div class="button">
-    <button onclick="location.href='./chat.html'">
-        <img src="../../img/message.png" alt=""/>
-        <em>私聊</em>
-    </button>
-    <button>接单</button>
-</div>
+        <div class="button">
+            <button onclick="location.href='./chat.html'">
+                <img src="../../img/message.png" alt=""/>
+                <em>私聊</em>
+            </button>
+            <button>接单</button>
+        </div>-->
     </div>
 </div>
 </body>
 <script src="../../js/common/x_rem.js"></script>
 <script src="../../js/common/jquery.min.js"></script>
+<script src="../../js/common/sweetalert2.js"></script>
 <!--<script src="../../js/common/zepto.min.js"></script>
 <script src="../../js/common/selector.js"></script>
 <script src="../../js/common/touch.js"></script>-->
 <script src="../../js/common/base.js"></script>
 <script src="../../js/common/back.js"></script>
+<script src="../../js/common/template-web.js"></script>
+<script src="../../js/common/template.js"></script>
+<script id="detail" type="text/html">
+    <h2>{{data.workType}}{{data.introduce}}</h2>
+    <div class="pri_detail">
+        <em>￥{{data.priceType}}</em>
+        <i>{{data.payMethod==0?"线下结算":"线上结算"}}</i>
+        <del>{{time(data.createDate,5,13)}}</del>
+    </div>
+    <div class="clearfix">
+        <div class="le f_left">
+            需求人数:
+        </div>
+        <div class="re f_left">
+            {{data.number}}人
+        </div>
+
+    </div>
+    <div  class="clearfix">
+        <div class="le f_left">
+            性别要求:
+        </div>
+        <div class="re f_left">
+            {{data.sex}}
+        </div>
+    </div>
+    <div  class="clearfix">
+        <div class="le f_left">
+            工作日期:
+        </div>
+        <div class="re f_left">
+            {{time(data.startTime,0,10)}}至{{time(data.endTime,0,10)}}
+        </div>
+    </div>
+    <div  class="clearfix">
+        <div class="le f_left">
+            工作时段:
+        </div>
+        <div class="re f_left">
+           {{data.workTime}}
+        </div>
+    </div>
+    <div  class="clearfix">
+        <div class="le f_left">
+            工作地点:
+        </div>
+        <div class="re f_left address">
+            <em></em>{{data.address}}
+        </div>
+    </div>
+    <div  class="clearfix">
+        <div class="le f_left">
+            联系电话:
+        </div>
+        <div class="re f_left">
+            {{data.mobilePhone}}
+        </div>
+    </div>
+    <h3>工作描述:</h3>
+    <p>{{data.introduce}}</p>
+    <div class="button">
+        <button onclick="location.href='./chat.html?url={{data.user.mobilePhone}}'">
+            <img src="../../img/message.png" alt=""/>
+            <em>私聊</em>
+        </button>
+        <button onclick="signUpJob('{{data.jobId}}')" class="sign_up">接单</button>
+    </div>
+</script>
+<script>
+
+    //报名
+    function signUp(data){
+        console.log(data);
+        if(data.code==200){
+            sweetAlert(
+                    "恭喜您",
+                    data.msg,
+                    "success"
+            )
+            $(".sign_up").text("等待审核");
+
+        }else{
+            sweetAlert(
+                    "sorry",
+                    data.msg,
+                    "error"
+            )
+        }
+    }
+    function signUpJob(id){
+        myAjax({url:"/job/signUpJob",data:{jobId:id},type:"post",async:false},signUp);
+    }
+
+    $(function () {
+        //
+        var href=location.href.split("=")[1];
+        console.log(href);
+        // /job/getJobById/{jobId}
+        function render(data){
+            console.log(data);
+            if(data.code==200){
+                template.helper("time",function(date,a,b) {
+                    var time = new Date(date).toLocaleString().replace(/:\d{1,2}$/, ' ').replace(/\//g, "-").substr(a,b);
+                    return time;
+                })
+                    $(".main").html(template("detail",data));
+
+            }
+        }
+        myAjax({url:"/job/getJobById/"+href,type:"get",async:false},render);
+
+
+    })
+</script>
 </html>

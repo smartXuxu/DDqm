@@ -12,6 +12,22 @@
     <link rel="stylesheet" href="../../css/data/index_1.css"/>
     <link rel="stylesheet" href="../../css/mui.min.css"/>
     <link rel="stylesheet" href="../../css/publish/bill.css"/>
+    <script src="../../js/common/mui.min.js"></script>
+
+    <!--<script src="../../js/common/zepto.min.js"></script>
+    <script src="../../js/common/selector.js"></script>
+    <script src="../../js/common/touch.js"></script>-->
+    <script src="../../js/common/base.js"></script>
+    <script src="../../js/common/back.js"></script>
+    <script src="../../js/common/fastclick.js"></script>
+    <script src="../../js/data/jquery-1.10.2_1.js"></script>
+    <script src="../../js/data/flexible.debug_1.js"></script>
+    <script src="../../js/data/flexible_css.debug_1.js"></script>
+    <script src="../../js/data/mobilefix_1.js"></script>
+    <script src="../../js/data/swiper.min_1.js"></script>
+    <script src="../../js/data/kinerdatepicker_1.js"></script>
+    <script src="../../js/common/sweetalert2.js"></script>
+    <script src="../../js/common/x_rem.js"></script>
 </head>
 <body>
 <div class="layer">
@@ -22,7 +38,7 @@
     <div class="main">
         <div class="work_type">
             <span>岗位类型</span>
-            <a href="#middlePopover">洗衣服 <i class="mui-icon mui-icon-arrowdown"></i> </a>
+            <a href="#middlePopover">请选择 <i class="mui-icon mui-icon-arrowdown"></i> </a>
             <div id="middlePopover" class="mui-popover">
                 <div class="mui-card">
                     <ul class="mui-table-view mui-table-view-radio work_style">
@@ -79,7 +95,6 @@
                     <ul class="mui-table-view mui-table-view-radio pail">
                         <li class="mui-table-view-cell">
                             <a class="mui-navigate-right">
-
                                 元/时
                             </a>
                         </li>
@@ -98,67 +113,64 @@
 
             </div>
         </div>
+        <div class="pall_style">
+            <span>支付方式</span>
+            <div class="style_choose clearfix">
+                <span data-type="0">线上支付 <i class="active">√</i></span>
+                <span data-type="1">线下支付 <i>√</i></span>
+            </div>
+        </div>
 
         <button class="pub">发布</button>
     </div>
 </div>
 </body>
 
-<script src="../../js/common/mui.min.js"></script>
-<!--<script src="../../js/common/zepto.min.js"></script>
-<script src="../../js/common/selector.js"></script>
-<script src="../../js/common/touch.js"></script>-->
-<script src="../../js/common/base.js"></script>
-<script src="../../js/common/back.js"></script>
-<script src="../../js/common/fastclick.js"></script>
-<script src="../../js/data/jquery-1.10.2_1.js"></script>
-<script src="../../js/data/flexible.debug_1.js"></script>
-<script src="../../js/data/flexible_css.debug_1.js"></script>
-<script src="../../js/data/mobilefix_1.js"></script>
-<script src="../../js/data/swiper.min_1.js"></script>
-<script src="../../js/data/kinerdatepicker_1.js"></script>
-<script src="../../js/common/sweetalert2.js"></script>
-<script src="../../js/common/x_rem.js"></script>
+
+
 <script>
 
     $(function () {
+        isUser();
         FastClick.attach(document.body);
+        // 选单 用户选择 必须通过认证 才能选单
+        function render(data){
+            console.log(data);
+            if(data.code==200){
+              if(data.data.auth==false){
+                  sweetAlert(
+                            "sorry",
+                          "你还没有认证通过",
+                          "error"
+                  ).then(function(){
+                location.href="../mine/mine.html"
+                          })
+              }
+                return false;
+                /* if(data.avatar!==null){
+                 $(".content>img").css("src",data.avatar);
+                 }*/
+
+            }
+        }
+        myAjax({url:"/user/getCurrentUserMessage",data:{},type:"get",async:false},render)
+
+
+
+        var payMethod=1;
+        $(".style_choose span").click(function () {
+            $(this).children().addClass("active");
+            $(this).siblings().children().removeClass("active");
+            payMethod=$(this).data("type");
+            console.log(payMethod);
+        });
+
         $('#kinerDatePickerInput1').kinerDatePicker({
             clickMaskHide: true,
-            /* showHandler: function (ctx) {
-             console.log("显示时间选择器:",ctx);
-             },
-             hideHandler: function (ctx) {
-             console.log("隐藏时间选择器:",ctx);
-             },
-             changeHandler: function (vals,ctx) {
-             console.log("时间改变:",vals,ctx);
-             },
-             okHandler: function (vals, ctx) {
-             console.log("确定选择:",vals,ctx);
-             },
-             cancelHandler: function (ctx) {
-             console.log("取消选择:",ctx);
-             }*/
         });
 
         $('#kinerDatePickerInput2').kinerDatePicker({
             clickMaskHide: true,
-            /* showHandler: function (ctx) {
-             console.log("显示时间选择器:",ctx);
-             },
-             hideHandler: function (ctx) {
-             console.log("隐藏时间选择器:",ctx);
-             },
-             changeHandler: function (vals,ctx) {
-             console.log("时间改变:",vals,ctx);
-             },
-             okHandler: function (vals, ctx) {
-             console.log("确定选择:",vals,ctx);
-             },
-             cancelHandler: function (ctx) {
-             console.log("取消选择:",ctx);
-             }*/
         });
         document.querySelector('.mui-table-view.work_style').addEventListener('selected',function(e1){
             window.event? window.event.cancelBubble = true : e.stopPropagation();
@@ -186,7 +198,79 @@
             var pailMoney=$(".pail_require>input").val()+$(".pail_require>a").text();
             console.log(pailMoney);
             //需要的人数
-            var needPeople=$(".need>input").val();
+
+            var workType=$(".work_type>a").text();
+            if(workType=="请选择"){
+                sweetAlert(
+                        "sorry",
+                        "请您选择工作类型",
+                        "error"
+                );
+                return false;
+            }
+
+            var workTime=$(".time>input").val();
+            if(workTime==""){
+                sweetAlert(
+                        "sorry",
+                        "请您描述工作时段",
+                        "error"
+                );
+                return false;
+            }
+            var startTime=$("#kinerDatePickerInput1").text();
+            var endTime=$("#kinerDatePickerInput2").text();
+            if(startTime=="请选择开始时间"||endTime=="请选择结束时间"){
+                sweetAlert(
+                        "sorry",
+                        "请选择时间",
+                        "error"
+                );
+                return false;
+            }else{
+                endTime=new Date(endTime.replace(/-/g,"/")).getTime();
+                startTime=new Date(startTime.replace(/-/g,"/")).getTime();
+            }
+
+            var address=$(".work>input").val();
+            if(address==""){
+                sweetAlert(
+                        "sorry",
+                        "请您填写工作地点",
+                        "error"
+                );
+                return false;
+            }
+
+            var price=$(".pail_require>input").val();
+            if(price==""){
+                sweetAlert(
+                        "sorry",
+                        "请您填写金额",
+                        "error"
+                );
+                return false;
+            }
+
+            var priceType=price+$(".pail_require>a").text();
+            //这是一个搜索的页面
+            // 当用户点击搜索之后需要跳转到 搜索的页面
+            // 支付方式
+           localStorage.setItem( "address",address);
+           localStorage.setItem( "endTime",endTime);
+           localStorage.setItem( "priceType",priceType);
+           localStorage.setItem( "startTime",startTime);
+           localStorage.setItem( "workTime",workTime);
+           localStorage.setItem( "workType",workType);
+           localStorage.setItem( "payMethod",payMethod);
+            location.href='./send_order_pail.html';
+                  /*  endTime:endTime,
+                    priceType:priceType,
+                    startTime:startTime,
+                    workTime:workTime,
+                    workType:workType,
+                    payMethod:payMethod*/
+
         })
 
 

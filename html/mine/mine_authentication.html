@@ -108,7 +108,7 @@
         </div>
         <div class="idCard">
             <span>证件号码</span>
-            <input type="text" placeholder="请输入证件号码"/>
+            <input type="number" placeholder="请输入证件号码"/>
         </div>
     </div>
 
@@ -116,9 +116,6 @@
 </div>
 </body>
 <script src="../../js/common/x_rem.js"></script>
-<!--<script src="../../js/common/zepto.min.js"></script>
-<script src="../../js/common/selector.js"></script>
-<script src="../../js/common/touch.js"></script>-->
 <script src="../../js/common/jquery.min.js"></script>
 <script src="../../js/common/mui.min.js"></script>
 <script src="../../js/common/base.js"></script>
@@ -148,17 +145,64 @@
         $(".begin_path").click(function () {
             var base64IdCardBack=$(".open_box").css("background-image").replace('url(','').replace(')','');
             //var base64IdCardBack=$(".open_box").css('backgroundImage').replace('url(','').replace(')','');
-            console.log(base64IdCardBack);
-            if(base64IdCardBack.replace(/\"/g,"") =="http://localhost:63342/DD/img/my_hel_card.png"){
+            //console.log(base64IdCardBack);
+            if(base64IdCardBack.replace(/\"/g,"").match("img/my_hel_card.png")){
+            //if(base64IdCardBack.replace(/\"/g,"") =="http://localhost:63342/DD/img/my_hel_card.png"){
                 sweetAlert(
                         'sorry',
                         '您还没有上传图片喔！',
                         'error'
                 )
-                base64IdCardBack="";
+               return false;
             }else{
-                base64IdCardBack=base64IdCardBack;
+                var idCardImage=base64IdCardBack.replace(/"/g,"");
             }
+// /user/uploadIdCardImage
+            var userName=$(".name>input").val().trim();
+            if(userName==""){
+                sweetAlert(
+                        "sorry",
+                        "请填写您的姓名",
+                        "error"
+                )
+                return false;
+            }
+            let idCardNumber=$(".idCard>input").val().trim();
+
+            //验证 身份证号
+
+                // 身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X
+                var reg = /(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+                if(reg.test(idCardNumber) === false) {
+                    alert("您的身份证输入不合法");
+                    $("#Idcard").val("");
+                    return false;
+                }
+            //isCardNo(idCardNumber);
+            console.log (1);
+            function render(data){
+                console.log(data);
+                if(data.code==200){
+                    sweetAlert(
+                            "恭喜您",
+                            data.msg,
+                            "success"
+
+                    ).then(function () {
+                                back();
+                            })
+                }else{
+                    sweetAlert(
+                            "sorry",
+                            data.msg,
+                            "error"
+
+                    )
+                }
+            }
+
+myAjax({url:"/user/uploadIdCardImage",data:{userName:userName,idCardNumber:idCardNumber,idCardImage:idCardImage},type:"post"},render);
+
         })
 
     })

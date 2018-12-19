@@ -7,6 +7,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
     <link rel="stylesheet" href="../../css/base.css"/>
     <link rel="stylesheet" href="../../css/header.css"/>
+    <link rel="stylesheet" href="../../css/sweetalert2.css"/>
     <link rel="stylesheet" href="../../css/index/job_detail.css"/>
 </head>
 <body>
@@ -16,7 +17,7 @@
         <h3>岗位详情</h3>
     </header>
     <div class="main">
-        <ul class="list_b">
+     <!--   <ul class="list_b">
             三种状态
             <li>. 已报名</li>
             <li>. 未处理</li>
@@ -88,7 +89,7 @@
         <p>空余时间可以做，有过1年做饭经验</p>
         <div class="quit_order">
             取消接单
-        </div>
+        </div>-->
     </div>
 </div>
 </body>
@@ -99,4 +100,169 @@
 <script src="../../js/common/touch.js"></script>-->
 <script src="../../js/common/base.js"></script>
 <script src="../../js/common/back.js"></script>
+<script src="../../js/common/sweetalert2.js"></script>
+<script src="../../js/common/template-web.js"></script>
+<script src="../../js/common/template.js"></script>
+<script id="detail" type="text/html">
+    <ul class="list_b">
+        {{if data.status==0}}
+        <li>. 已报名</li>
+        <li>. 未处理</li>
+        {{else if data.status==1||data.status==4||data.status==5||data.status==6}}
+        <li>. 已报名</li>
+        <li>. 简历被查看</li>
+        <li>. 录用成功</li>
+        {{else if data.status==2}}
+        <li>. 已报名</li>
+        <li>. 简历被查看</li>
+        <li>. 拒绝录用</li>
+        {{else if data.status==3}}
+        <li>. 已报名</li>
+        <li>. 简历被查看</li>
+        <li>. 订单取消</li>
+        {{/if}}
+
+    </ul>
+    <h2>{{data.job.workType}}</h2>
+    <div class="pri_detail">
+        <em>￥{{data.job.priceType}}</em>
+        <i>{{data.job.payMethod==0?"线下结算":"线上结算"}}</i>
+        <del>{{time(data.job.createDate,5,13)}}</del>
+    </div>
+    <div class="clearfix">
+        <div class="le f_left">
+            需求人数:
+        </div>
+        <div class="re f_left">
+            {{data.job.number}}人
+        </div>
+
+    </div>
+    <div  class="clearfix">
+        <div class="le f_left">
+            性别要求:
+        </div>
+        <div class="re f_left">
+            {{data.job.sex}}
+        </div>
+    </div>
+    <div  class="clearfix">
+        <div class="le f_left">
+            工作日期:
+        </div>
+        <div class="re f_left">
+            {{time(data.job.startTime,0,10)}}至{{time(data.job.endTime,0,10)}}
+        </div>
+    </div>
+    <div  class="clearfix">
+        <div class="le f_left">
+            工作时段:
+        </div>
+        <div class="re f_left">
+            {{data.job.workTime}}
+        </div>
+    </div>
+    <div  class="clearfix">
+        <div class="le f_left">
+            工作地点:
+        </div>
+        <div class="re f_left address">
+            <em></em>{{data.job.address}}
+        </div>
+    </div>
+    <div  class="clearfix">
+        <div class="le f_left">
+            联系电话:
+        </div>
+        <div class="re f_left">
+            {{data.job.mobilePhone}}
+        </div>
+    </div>
+    <h3>工作描述:</h3>
+    <p>{{data.job.introduce}}</p>
+    {{if data.status==1 || data.status==0}}
+    <div class="quit_order cancel_order" onclick="cancelJob('{{data.jobOrderId}}')">
+        取消接单
+    </div>
+    <div class="sure_work"onclick="commpetOrder('{{data.jobOrderId}}')" >
+       完成订单
+    </div>
+    {{else if data.status==2}}
+    <div class="quit_order cancel">
+        被拒绝
+    </div>
+    {{else if data.status==3}}
+    <div class="quit_order cancel">
+       订单已被取消
+    </div>
+
+    {{else if data.status==4||data.status==5}}
+    <div class="quit_order">
+        订单已完成，等待支付
+    </div>
+    {{else if data.status==6}}
+    <div class="quit_order">
+        支付完成
+    </div>
+    {{/if}}
+</script>
+<script>
+    // /job/cancelJobOrder/{jobOrderId} 接单者取消订单
+    function cancelJob(id){
+        function cancel(data){
+            console.log(data);
+            if(data.code==200){
+                sweetAlert(
+                        "恭喜您",
+                        data.msg,
+                        "success"
+                ).then(function () {
+                            myAjax({url:`/job/order/${id}`,async:false},render);
+                        })
+            }else{
+                sweetAlert(
+                        "sorry",
+                        data.msg,
+                        "error"
+                )
+            }
+        }
+        myAjax({url:`/job/cancelJobOrder/${id}`,type:"delete"},cancel);
+    }
+    // /job/setOrderStatusToComplete/{jobOrderId} 接单者 改变订单状态 变成已完成
+    function commpetOrder(id) {
+        function orders_com(data) {
+            console.log(data);
+            if(data.code==200){
+                myAjax({url:`/job/order/${id}`,async:false},render);
+            }
+        }
+
+        myAjax({url:`/job/setOrderStatusToComplete/${id}`,type:"post"},orders_com);
+    }
+    ///job/order/{jobOrderId} 根据订单Id查询详情
+
+    var id=location.href.split("=")[1];
+    console.log(id);
+    function render(data){
+        console.log(data);
+        if(data.code==200){
+            template.helper("time",function(date,a,b) {
+                var time = new Date(date).toLocaleString().replace(/:\d{1,2}$/, ' ').replace(/\//g, "-").substr(a,b);
+                return time;
+            })
+            $(".main").html(template("detail",data));
+
+
+        }else{
+            sweetAlert(
+                    "SORRY",
+                    data.msg,
+                    "error"
+            )
+        }
+    }
+    myAjax({url:`/job/order/${id}`,async:false},render);
+
+</script>
 </html>

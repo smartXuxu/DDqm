@@ -94,7 +94,7 @@
     <div class="main">
         <div class="header">
             <p>账户余额(元)</p>
-            <h3>763.36</h3>
+            <h3>0.00</h3>
         </div>
         <div class="content">
             <ul>
@@ -125,4 +125,15 @@
 <script src="../../js/common/touch.js"></script>-->
 <script src="../../js/common/base.js"></script>
 <script src="../../js/common/back.js"></script>
+<script>
+    $(function () {
+        function render(data){
+            console.log(data);
+            if(data.code==200){
+                $(".header>h3").text(data.data.balance);
+            }
+        }
+        myAjax({url:'/pay/getCurrentUserWallet',data:{},type:"post",async:false},render);
+    })
+</script>
 </html>

@@ -66,19 +66,19 @@
 <script>
     var userId=location.href.split("=")[1];
     $(function (){
-       // getheader();
+       getheader();
         function getheader(){
             $.ajax({
                 xhrFields: {
                     withCredentials: true
                 },
-                type: "post",
+                type: "get",
                 async:false,
-                url: baseUrl+"/student/findAvatar",
+                url: baseUrl+"/user/getCurrentUserMessage",
                 dataType: 'json',
                 success:function(data){
                     //console.log(data.message);
-                    $(".top>img").attr("src",data.message);
+                    $(".top>img").attr("src",data.data.avatar);
 
                 },
                 error:function(data){

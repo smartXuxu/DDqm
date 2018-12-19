@@ -6,50 +6,55 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
     <title>咚咚敲门首页</title>
     <link rel="stylesheet" href="../../css/base.css"/>
-    <link rel="stylesheet" href="../../css/mui.min.css">
+    <!--<link rel="stylesheet" href="../../css/mui.min.css">-->
+    <link rel="stylesheet" href="../../css/swiper.min.css">
     <link rel="stylesheet" href="../../css/index/index.css">
+    <link rel="stylesheet" href="../../css/sweetalert2.css">
     <link rel="stylesheet" href="../../css/footer.css">
 </head>
 <body>
+<div id="loading">
+    <img src="../../img/login.gif" alt=""/>
+</div>
 <div class="layer">
     <header>
         <div class="tit">
-            <em onclick="location.href='./select_city.html'">北京 <s>&nbsp;∨</s></em>
+            <em onclick="location.href='./select_city.html'"><s>郑州</s> &nbsp;∨</em>
             <input type="text" id="search"/>
         </div>
-        <div id="slider" class="mui-slider" >
+        <!--<div id="slider" class="mui-slider" >
             <div class="mui-slider-group mui-slider-loop">
-                <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+                &lt;!&ndash; 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) &ndash;&gt;
                 <div class="mui-slider-item mui-slider-item-duplicate">
                     <a href="#">
                         <img src="../../img/index_1.png">
                     </a>
                 </div>
-                <!-- 第一张 -->
+                &lt;!&ndash; 第一张 &ndash;&gt;
                 <div class="mui-slider-item">
                     <a href="#">
                         <img src="../../img/index_1.png">
                     </a>
                 </div>
-                <!-- 第二张 -->
+                &lt;!&ndash; 第二张 &ndash;&gt;
                 <div class="mui-slider-item">
                     <a href="#">
                         <img src="../../img/index_1.png">
                     </a>
                 </div>
-                <!-- 第三张 -->
+                &lt;!&ndash; 第三张 &ndash;&gt;
                 <div class="mui-slider-item">
                     <a href="#">
                         <img src="../../img/index_1.png">
                     </a>
                 </div>
-                <!-- 第四张 -->
+                &lt;!&ndash; 第四张 &ndash;&gt;
                 <div class="mui-slider-item">
                     <a href="#">
                         <img src="../../img/index_1.png">
                     </a>
                 </div>
-                <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+                &lt;!&ndash; 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) &ndash;&gt;
                 <div class="mui-slider-item mui-slider-item-duplicate">
                     <a href="#">
                         <img src="../../img/index_1.png">
@@ -62,6 +67,16 @@
                 <div class="mui-indicator"></div>
                 <div class="mui-indicator"></div>
             </div>
+        </div>-->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="../../img/index_1.png" alt=""/></div>
+                <div class="swiper-slide"><img src="../../img/index_1.png" alt=""/></div>
+                <div class="swiper-slide"><img src="../../img/index_1.png" alt=""/></div>
+            </div>
+            <!-- 如果需要分页器 -->
+            <div class="swiper-pagination"></div>
+
         </div>
     </header>
     <!--导航列表-->
@@ -104,34 +119,28 @@
     <div class="choose_list">
         <ul class="clearfix">
             <li>
-                <a  href="javascript:;">发布时间 <del class="mui-icon mui-icon-arrowdown"></del></a>
+                <a href="javascript:;">发布时间 <del class="mui-icon mui-icon-arrowdown"></del></a>
                 <ul class="nearTime">
-                    <li>最近三天</li>
-                    <li>最近半月</li>
-                    <li>最近一月</li>
+                    <li data-mouth="3" >最近三天</li>
+                    <li data-mouth="15">最近半月</li>
+                    <li data-mouth="30">最近一月</li>
                 </ul>
             </li>
-            <li><a  href="javascript:;">离我最近</a></li>
+            <li>
+                <a  href="javascript:;">离我最近</a></li>
             <li>
                 <a href="javascript:;">性别 <del class="mui-icon mui-icon-arrowdown"></del></a>
                 <ul class="sex">
-                    <li>全部</li>
-                    <li>男生可做</li>
-                    <li>女生可做</li>
+                    <li data-sex="全部">全部</li>
+                    <li data-sex="男" >男生可做</li>
+                    <li data-sex="女" >女生可做</li>
                 </ul>
             </li>
         </ul>
     </div>
     <div class="lists">
-        <div class="list clearfix" onclick="location.href='./job_detail.html'">
-            <img src="../../img/eatCooker.png" alt=""/>
-            <div class="center clearfix">
-                <em>四川口味饭四川口味饭四川口味饭四川口味饭</em>
-                <del>￥20/次&nbsp;&nbsp;&nbsp;&nbsp; <i>金水区</i></del>
-            </div>
-            <div class="right">已健康认证</div>
-        </div>
-        <div class="list clearfix" onclick="location.href='./job_detail.html'">
+
+       <!-- <div class="list clearfix" onclick="location.href='./job_detail.html'">
             <img src="../../img/focus-img1.png" alt=""/>
             <div class="center clearfix">
                 <em>四川口味饭四川口味饭四川口味饭四川口味饭</em>
@@ -146,7 +155,7 @@
                 <del>￥20/次&nbsp;&nbsp;&nbsp;&nbsp; <i>金水区</i></del>
             </div>
             <div class="right">已健康认证</div>
-        </div>
+        </div>-->
     </div>
     <footer>
         <ul>
@@ -166,50 +175,161 @@
     </footer>
 </div>
 </body>
+<!--<script src="../../js/common/mui.min.js"></script>-->
 <script src="../../js/common/x_rem.js"></script>
-<!--<script src="../../js/common/zepto.min.js"></script>
-<script src="../../js/common/selector.js"></script>
-<script src="../../js/common/touch.js"></script>-->
 <script src="../../js/common/jquery.min.js"></script>
+<script src="../../js/common/swiper.min.js"></script>
 <script src="../../js/common/fastclick.js"></script>
-<script src="../../js/common/mui.min.js"></script>
 <script src="../../js/common/base.js"></script>
-
+<script src="../../js/common/sweetalert2.js"></script>
+<script src="../../js/common/template-web.js"></script>
+<script src="../../js/common/template.js"></script>
+<script id="detail" type="text/html">
+    {{if data==null||data.length==0}}
+    <div class="no_info">对不起，暂时没有合适的岗位</div>
+    {{else}}
+    {{each data as value i}}
+    <div class="list clearfix" onclick="location.href='./job_detail.html?url={{value.jobId}}'">
+        <img src="{{value.user.avatar==null?'../../img/eatCooker.png':value.user.avatar}}" onerror="this.src='../../img/eatCooker.png'" alt=""/>
+        <div class="center clearfix">
+            <em>{{value.workType}}、{{value.introduce}}</em>
+            <del>￥{{value.priceType}}&nbsp;&nbsp;&nbsp;&nbsp; <i>{{value.address}}</i></del>
+        </div>
+        <div class="right">已健康认证</div>
+    </div>
+    {{/each}}
+    {{/if}}
+</script>
 <script>
+
     $(function(){
-        FastClick.attach(document.body);
-        mui.init({
+        document.addEventListener('plusready', function(a) {
+            var first = null;
+            plus.key.addEventListener('backbutton', function() {
+                //首次按键，提示‘再按一次退出应用’
+                if (!first) {
+                    first = new Date().getTime();
+//                    document.write('再按一次退出应用');//用自定义toast提示最好
+                    $("body").append('<div class="tishi">再按一次退出应用</div>');
+                    $(".tishi").css({
+                        "width": "3rem",
+                        "display": "flex",
+                        "position": "absolute",
+                        "font-size": ".24rem",
+                        "background": "rgba(63,63,63,0.8)",
+                        "height": ".6rem",
+                        "line-eight": ".6rem",
+                        "top": "83vh",
+                        "left": "50%",
+                        "taxt-align":"center",
+                        "transform":"translateX(-50%)",
+                        "border-radius": "32px",
+                        "color": "#ffffff",
+                        "padding": ".1rem 0px 0px .50rem"
+                    });
+
+                    setTimeout(function() {
+                        first = null;
+                        $(".tishi").fadeOut(2000,function(){
+                            $(".tishi").remove();
+                        });
+                    }, 1000);
+                } else {
+                    if (new Date().getTime() - first < 1000) {
+                        plus.runtime.quit();
+                    }
+                }
+            }, false);
+        });
+
+        $(document).ajaxStop(function(){
+            $("#loading").hide();
+        });
+      FastClick.attach(document.body);
+       /* mui.init({
             swipeBack:true //启用右滑关闭功能
         });
         mui('body').on('tap','a',function(){document.location.href=this.href;});
-        var slider = mui("#slider");
+*/
+        var mySwiper = new Swiper ('.swiper-container', {
+            direction: 'horizontal', // 垂直切换选项
+            loop: true, // 循环模式选项
+            autoplay:true,
+            // 如果需要分页器
+            pagination: {
+                el: '.swiper-pagination',
+            },
+
+        })
+        /*var slider = mui("#slider");
         slider.slider({
             interval: 2000//自动轮播周期，若为0则不自动播放，默认为0；
-        });
+        });*/
         $("#search").focus(function () {
             location.href='search.html';
         });
+        var city=localStorage.getItem("city");
+        if(!city){
+            city= $("header>.tit>em>s").text()
+        }
+        $("header>.tit>em>s").text(city);
+
+        myAjax({url:"/job/searchByCity/"+city,async:false},getCity);
+        function getCity(data){
+            console.log(data);
+            if(data.code==200){
+                $(".lists").html(template("detail",data));
+            }
+        }
         var flag=true;
-            $(".choose_list>ul>li").click(function () {
-                if(flag){
-                    $(this).children().show();
-                   // console.log($(this));
-                    $(this).find("a").addClass("active");
-                    $(this).siblings().find("a").removeClass("active");
-                    $(this).find("del").removeClass("mui-icon-arrowdown");
-                    $(this).find("del").addClass("mui-icon-arrowup");
-                    flag=false;
-                }else{
-                    $(this).children("ul").hide();
-                    $(this).find("a").removeClass("active");
-                    $(this).find("del").removeClass("mui-icon-arrowup");
-                    $(this).find("del").addClass("mui-icon-arrowdown");
-                    flag = true;
+        $(".choose_list>ul>li").click(function () {
+            if(flag){
+                $(this).children().show();
+                // console.log($(this));
+                $(this).find("a").addClass("active");
+                $(this).siblings().find("a").removeClass("active");
+                $(this).find("del").removeClass("mui-icon-arrowdown");
+                $(this).find("del").addClass("mui-icon-arrowup");
+                if($(this).find("a").text()=="离我最近"){
+                    function getCity(data){
+                        data.data=data.data.reverse();
+                        if(data.code==200){
+                            $(".lists").html(template("detail",data));
+                        }
+                    }
+                    myAjax({url:"/job/searchByCity/"+city,async:false},getCity);
                 }
-            })
+                flag=false;
+            }else{
+                $(this).children("ul").hide();
+                $(this).find("a").removeClass("active");
+                $(this).find("del").removeClass("mui-icon-arrowup");
+                $(this).find("del").addClass("mui-icon-arrowdown");
+                flag = true;
+            }
+        });
         $(".choose_list>ul>li li").click(function () {
-           // alert(1);
+            //alert($(this).text());
+            var text=$(this).data();
+            console.log(text);
+            if(text.sex){
+                //console.log("sex");
+                var sex=$(this).data("sex");
+                //console.log(sex);
+                getOther({sex:sex,city:city});
+            }else{
+                //console.log("mouth");
+                    var ntervalMouth=$(this).data("mouth");
+                getOther({ntervalMouth:ntervalMouth,city:city});
+                console.log(ntervalMouth);
+            }
         })
+        // /job/searchByCityAndOthers
+        function getOther(data){
+            myAjax({url:"/job/searchByCityAndOthers",data:data,type:"get",async:false},getCity)
+        }
+
     })
+
 </script>
 </html>

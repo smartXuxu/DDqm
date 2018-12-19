@@ -15,7 +15,7 @@
 <body>
 <div class="layer">
     <div class="box">
-        <h2>模联</h2>
+        <h2>咚咚敲门</h2>
         <div class="username">
             <i></i>
             <input type="text"  id="phone" placeholder="手机号码"/>
@@ -32,7 +32,7 @@
         <button class="login_Button" onclick="window.location.href='login.html'">已有账户？立即登录</button>
     </div>
 </div>
-<script src="../js/common/zepto.min.js"></script>
+<script src="../js/common/x_rem.js"></script>
 <script src="../js/common/jquery.min.js"></script>
 <!--<script src="../js/common/x_rem.js"></script>
 <script src="../js/common/selector.js"></script>
@@ -55,9 +55,9 @@
             flag=true;
         }
     });
-    var flag = true;
+    var falg = true;
     function getcode(){
-        if(!flag){
+        if(!falg){
             return;
         }
         var mobile = $('#phone').val();
@@ -68,7 +68,7 @@
         }
        // var uuid=Math.random().toString(36).substr(2);
         //var obj = {mobile:mobile,uuid:uuid,type:1};
-        flag = false;
+        falg = false;
         $.ajax({
             xhrFields: {
                 withCredentials: true
@@ -150,7 +150,7 @@
             },
             type: "post",
             //contentType:'application/json;charset=UTF-8',
-            url: baseUrl+"/worker/workerRegister",
+            url: baseUrl+"/user/register",
             data: parms,
             dataType: 'json',
             success: function (data){
@@ -162,7 +162,7 @@
                             'success'
                     ).then(function () {
                                 localStorage.removeItem("code");
-                                window.location.href="./addData.html";
+                                window.location.href="./login.html";
                             })
                 }
                 else if(data.code=="500"){

@@ -3,7 +3,7 @@ html{
 }
 .main_list{
     width: 100%;
-    padding-top: 1.8rem;
+    padding-top: 1.7rem;
 }
 .main_list>.list{
     width: 100%;
@@ -53,4 +53,12 @@ html{
 }
 .list>.right.response{
     background-color:#f1ae4d;
+}
+.list>.right.reject{
+    background-color: #d2d2d2;
+    color:#333;
+}
+.list>.right.not_sure{
+    background-color: #e2c396;
+    color:#666;
 }

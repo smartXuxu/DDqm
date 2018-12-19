@@ -5,7 +5,7 @@ body{
     height: 1.6rem;
 }
 .layer>header>h3{
-    line-height: 1.2rem;
+    line-height: 1.1rem;
     font-size: 0.4rem;
 }
 
@@ -13,18 +13,18 @@ body{
     font-size: 0.28rem;
 }
 .main{
-    padding:2rem 0.5rem 0 0.5rem;
+    padding:1.8rem 0.5rem 0 0.5rem;
 
 }
 .main>div{
-    height: 1.2rem;
-    line-height:1.2em;
+    height: 1rem;
+    line-height:1rem;
     padding-bottom: 0.2rem;
     border-bottom: 1px solid #eeeeee;
 }
 .main>div>span{
     width: 30%;
-    line-height: 1.2rem;
+    line-height: 1rem;
     font-size: 0.3rem;
 }
 .main>div>a{
@@ -38,17 +38,17 @@ body{
     width: 68%;
     border: none;
     text-align: right;
-    height: 0.9rem;
+    height: 0.8rem;
     color:#999;
-    line-height: 0.9rem;
+    line-height: 0.8rem;
     padding-right:0;
 }
 .beg_time>span,.end_time>span{
     line-height: 1rem;
 }
 .beg_time>.kinerDatePickerInput,.end_time>.kinerDatePickerInput{
-    height: 1.2rem;
-    line-height: 1.2rem;
+    height: 1rem;
+    line-height: 1rem;
     color:#999;
     width: 66%;
     text-align: right;
@@ -57,6 +57,7 @@ body{
     border-bottom: none;
     height: 2rem;
     margin-top: 0.2rem;
+    margin-bottom: 1.2rem;
 }
 .main>.job_des>span{
     vertical-align: top;
@@ -69,6 +70,9 @@ body{
     color:#999;
 }
 .pub{
+    position: fixed;
+    bottom: 0;
+    left: 3%;
     width: 95%;
     height: 1rem;
     line-height: 1rem;
@@ -76,7 +80,8 @@ body{
     background-color: #e9a94f;
     display: block;
     margin:0 auto;
-    margin-top:1rem;
+    font-size: 0.3rem;
+
 }
 .mui-card{
     box-shadow: none;
@@ -92,7 +97,6 @@ a:hover{
 }
 .main>.pail_require>input{
     width: 52%;
-
     margin-right: 0;
     padding-right: 0;
 }
@@ -100,4 +104,32 @@ a:hover{
    width: 15%;
 
     text-align: right;
+}
+.style_choose{
+    display: inline-block;
+    width: 68%;
+
+    vertical-align: middle;
+}
+.style_choose>span{
+    width: 49%;
+    float: left;
+    text-align: center;
+    
+}
+.style_choose>span>i{
+    background-color: #eee;
+    width: 0.6rem;
+    height: 0.6rem;
+    margin-left: 0.1rem;
+    line-height: 0.6rem;
+    font-size: 0.3rem ;
+    display: inline-block;
+    border-radius: 50%;
+    vertical-align: middle;
+    color:#fff;
+
+}
+.style_choose>span>i.active{
+    background-color: #f0a30a;
 }

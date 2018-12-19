@@ -29,25 +29,25 @@
         <h3 onclick="back()">零钱充值</h3>
     </header>
     <div class="main">
-            <div class="box">
-                <div class="top">
-                    <img src="../../img/focus-img1.png" alt=""/>
-                    <div class="middle">
-                        <em>支付宝充值</em>
-                        <i>单日交易限额￥10000.00</i>
-                    </div>
-                  <!--  <div class="right">
-
-                    </div>-->
+        <div class="box">
+            <div class="top">
+                <img src="../../img/focus-img1.png" alt=""/>
+                <div class="middle">
+                    <em>支付宝充值</em>
+                    <i>单日交易限额￥10000.00</i>
                 </div>
-                <div class="center">
-                    <p>充值金额</p>
-                    <i>￥</i>
-                    <input type="text" class="price"/>
-                    <button class="next">下一步 </button>
-                </div>
+                <!--  <div class="right">
 
+                  </div>-->
             </div>
+            <div class="center">
+                <p>充值金额</p>
+                <i>￥</i>
+                <input type="text" class="price"/>
+                <button class="next">下一步 </button>
+            </div>
+
+        </div>
     </div>
 </div>
 
@@ -61,27 +61,25 @@
 </div>-->
 <script src="../../js/common/x_rem.js"></script>
 <script src="../../js/common/jquery.min.js"></script>
-<!--<script src="../../js/common/zepto.min.js"></script>
-<script src="../../js/common/selector.js"></script>
-<script src="../../js/common/touch.js"></script>-->
 <script src="../../js/common/base.js"></script>
 <script src="../../js/common/back.js"></script>
 <script>
-var userId=location.href.split("=")[1];
+    //var userId=location.href.split("=")[1];
     $(function (){
-       // getheader();
+        getheader();
         function getheader(){
             $.ajax({
                 xhrFields: {
                     withCredentials: true
                 },
-                type: "post",
+                type: "get",
                 async:false,
-                url: baseUrl+"/student/findAvatar",
+                url: baseUrl+"/user/getCurrentUserMessage",
                 dataType: 'json',
                 success:function(data){
+                    console.log(data);
                     //console.log(data.message);
-                    $(".top>img").attr("src",data.message);
+                    $(".top>img").attr("src",data.data.avatar);
 
                 },
                 error:function(data){
@@ -107,36 +105,36 @@ var userId=location.href.split("=")[1];
                 url: baseUrl+"/pay/aliPay.html",
                 data:{
                     price:price,
-                    type:1,
-                    userId:userId
+                    /*  type:1,
+                     userId:userId*/
                 },
                 dataType: 'text',
                 success:function(data) {
                     console.log('data',data)
                     //console.log(data.response);
-                   // location.href=baseUrl+"/pay/aliPay.html"+"?price="+price+"&"+"type=1"+"userId="+userId;
-                        //跳转页面
+                    // location.href=baseUrl+"/pay/aliPay.html"+"?price="+price+"&"+"type=1"+"userId="+userId;
+                    //跳转页面
                     if(data!==""){
                         localStorage.setItem("purseData",data);
                         location.href='my_purse_recharge_b.html';
-                       /* $(".layer").hide();
+                        $(".layer").hide();
                         $(".show").show();
                         var height=$("body").height();
                         var width= $("body").width();
                         console.log(height);
                         $("#sub_frame").css("height",height);
                         $("#sub_frame").css("width",width);
-                      //  $("#sub_frame").contents().find("body").css("height",height);
+                        //  $("#sub_frame").contents().find("body").css("height",height);
                         //$("#sub_frame").contents().find("body").css("width",width);
 
                         window.frames["code_result"].document.open();
                         window.frames["code_result"].document.write(data);
-                        window.frames["code_result"].document.close();*/
+                        window.frames["code_result"].document.close();
                         //$("iframe").contents().find("body").html(data);
                     }
-                       // document.write(data);
+                    // document.write(data);
 
-                        //document.close();
+                    //document.close();
 
                 },
                 fail: function (err, status) {

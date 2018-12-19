@@ -8,6 +8,7 @@
     <title>意见反馈</title>
     <link rel="stylesheet" href="../../css/base.css"/>
     <link rel="stylesheet" href="../../css/header.css"/>
+    <link rel="stylesheet" href="../../css/sweetalert2.css"/>
     <style>
         /*b8b8b8*/
         /*改变placeholder的字体颜色*/
@@ -62,7 +63,7 @@
     <header>
         <i onclick="back()"></i>
         <h3>意见反馈</h3>
-        <em>提交</em>
+        <em class="submit">提交</em>
     </header>
     <div class="main">
         <textarea placeholder="请输入您的意见..."></textarea>
@@ -77,10 +78,42 @@
 <script src="../../js/common/touch.js"></script>-->
 <script src="../../js/common/base.js"></script>
 <script src="../../js/common/back.js"></script>
+<script src="../../js/common/sweetalert2.js"></script>
 <script>
     $(function () {
         $(".del").click(function () {
             $("textarea").val("");
+        })
+        $(".submit").click(function () {
+            var message=$("textarea").val().trim();
+            if(message==""){
+                sweetAlert(
+                        "sorry",
+                        "你还没有填写意见哦",
+                        "error"
+                );
+                return false;
+            }else{
+                function submit(data){
+                    console.log(data);
+                    if(data.code==200){
+                        sweetAlert(
+                                "恭喜您",
+                                "您的意见提交成功了",
+                                "success"
+                        ).then(function () {
+                                    back();
+                                })
+                    }else{
+                        sweetAlert(
+                                "sorry",
+                                data.msg,
+                                "error"
+                        )
+                    }
+                }
+                myAjax({url:"/user/pushMessageBack",type:"post",data:{message:message}},submit);
+            }
         })
     })
 </script>

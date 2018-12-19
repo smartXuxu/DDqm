@@ -35,12 +35,32 @@
 </div>
 <script src="../../js/common/x_rem.js"></script>
 <script src="../../js/common/jquery.min.js"></script>
+<script src="../../js/common/mui.min.js"></script>
 <!--<script src="../../js/common/zepto.js"></script>
 <script src="../../js/common/selector.js"></script>
 <script src="../../js/common/touch.js"></script>-->
 <script src="../../js/common/base.js"></script>
 <script src="../../js/common/back.js"></script>
 <script>
+    (function($, doc) {
+        $.init();
+        $.plusReady(function() {
+            var backButtonPress = 0;
+            $.back = function(event) {
+                backButtonPress++;
+                if (backButtonPress > 1) {
+                    plus.runtime.quit();
+                } else {
+                    plus.nativeUI.toast('再按一次退出应用');
+                }
+                setTimeout(function() {
+                    backButtonPress = 0;
+                }, 1000);
+                return false;
+            };
+        });
+    }(mui, document));
+
     // 点击 del  页面消失，进入到主页的发布
     $(function(){
         $(".del").click(function(){

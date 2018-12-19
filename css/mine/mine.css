@@ -120,3 +120,6 @@ header>.content>.content_main>h4{
 .main>.content_main>.mine_about em{
     background-image: url("../../img/mine_about.png");
 }
+.main>.content_main>li:last-of-type>div{
+    border-bottom: none;
+}

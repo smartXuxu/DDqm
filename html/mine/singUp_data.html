@@ -7,6 +7,7 @@
 
     <title>个人资料</title>
     <link rel="stylesheet" href="../../css/base.css"/>
+    <link rel="stylesheet" href="../../css/sweetalert2.css"/>
 
     <link rel="stylesheet" href="../../css/header.css"/>
 </head>
@@ -24,8 +25,7 @@
         width: 100%;
         height: 1.1rem;
         line-height: 1.1rem;
-        border-bottom: 1px solid #eeeeee;
-
+        border-top: 1px solid #eeeeee;
     }
     .main>div>span{
         width: 30%;
@@ -58,6 +58,8 @@
         border-top: 0.1rem solid #eeeeee;
         height: auto;
         border-bottom: none;
+        padding-bottom: 1rem;
+
     }
     .main>.des>span{
         display: block;
@@ -86,6 +88,7 @@
        position: fixed;
        z-index: 2;
        bottom: 0;
+       border-bottom: 1px solid #eeeeee;
    }
     .apply>button{
         height: 0.9rem;
@@ -100,13 +103,98 @@
         left: 5%;
 
     }
+    /*.apply>.reject.sure{
+        background-color: #f0ad4e;
+        color: #fff;
+    }*/
     .apply>.agree{
         left: 50%;
         color:#fff;
         background-color: #f0ad4e;
     }
+
+    .main>.pay_money{
+        margin-bottom: 1.2rem;
+        border-bottom: none;
+    }
+    .work_time em,.pay_money em{
+        font-size: 0.20rem;
+        background-color: #f0ad4e;
+        padding: 0.1rem;
+        border-radius: 10px;
+        margin-left: 0.6rem;
+        color:#666;
+    }
+    #mask{
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        left: 0%;
+        top: 0%;
+        z-index: 100;
+        display: none;
+        background-color: rgba(0, 0, 0, .3);
+
+    }
+    #share,#pay_share{
+        display:none;
+        width: 80%;
+        height: auto;
+        position: fixed;
+        z-index: 101;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 10%;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        background-color: #fff;
+    }
+    #share>.box,#pay_share>.box{
+        width: 100%;
+        margin-top: 0.5rem;
+        text-align: center;
+        height: 1rem;
+        border-bottom: 1px solid #eeeeee;
+    }
+    #share>.box>input{
+        height: 0.6rem;
+        width: 0.6rem;
+        border:1px solid #f2f2f2;
+        border-radius: 3px;
+        text-align: center;
+        color:#333;
+    }
+    #pay_share>.box>input{
+        border:1px solid #d2d2d2;
+        border-radius:5px;
+        padding: 0.2rem;
+        text-align: center;
+        margin-right: 0.2rem;
+    }
+    #share>button,#pay_share>button{
+        border:none;
+        width: 49%;
+        height: 0.8rem;
+        line-height: 0.8rem;
+        padding: 0;
+        margin: 0;
+        background-color: #fff;
+
+    }
+    #share>button:first-of-type,#pay_share>button:first-of-type{
+        border-radius: 0 0 0 10px;
+        border-right: 1px solid #eeeeee;
+
+    }
+    #share>button:last-of-type,#pay_share>button:last-of-type{
+        border-radius: 0 0 10px 0;
+        color:#f0ad4e;
+    }
+
 </style>
 <body>
+<div id="mask"></div>
 <div class="layer">
     <header>
         <i onclick="back()"></i>
@@ -114,7 +202,7 @@
 
     </header>
     <div class="main">
-        <div class="header">
+        <!--<div class="header">
             <span>简历头像</span>
             <img src="../../img/focus-img1.png" alt="" onclick="location.href='head.html'"/>
         </div>
@@ -151,9 +239,14 @@
             <p>勤奋、认真、好学勤奋、认真、好学勤奋、认真、好学勤奋、认真、好学勤奋、认真、好学勤奋、认真、好学勤奋、认真、好学勤奋、认真、好学勤奋、认真、好学勤奋、认真、好学勤奋、认真、好学勤奋、认真、好学勤奋、认真、好学勤奋、认真、好学</p>
         </div>
         <div class="apply">
+            &lt;!&ndash;&ndash;&gt;
             <button class="reject">拒绝</button>
             <button class="agree">同意</button>
-        </div>
+            &lt;!&ndash;<button class="reject sure">已同意</button>
+            <button class="agree">确定订单</button>
+            <button class="reject sure">已确定订单</button>
+            <button class="agree">线上支付</button>&ndash;&gt;
+        </div>-->
     </div>
 </div>
 </body>
@@ -166,4 +259,256 @@
 <script src="../../js/common/back.js"></script>
 <script src="../../js/common/fastclick.js"></script>
 <script src="../../js/common/sweetalert2.js"></script>
+<script src="../../js/common/template-web.js"></script>
+<script src="../../js/common/template.js"></script>
+<script id="detail" type="text/html">
+    <div class="header">
+        <span>简历头像</span>
+        <img  src="{{data.user.avatar==null?'../../img/focus-img1.png':data.user.avatar}}" alt="" onerror="this.src='../../img/focus-img1.png'"/>
+    </div>
+    <div class="real_name">
+        <span>真实姓名</span>
+        <div>{{data.user.userName==null?data.user.nickName==null?'咚咚敲门':data.user.nockName:data.user.userName}}</div>
+    </div>
+    <div class="nick_name">
+        <span>昵称</span>
+        <div>{{data.user.nickName==null?data.user.userName==null?'咚咚敲门':data.user.userName:data.user.nickName}}</div>
+    </div>
+    <div class="sex sex_require">
+        <span>性别</span>
+        <div>{{data.user.sex==1?"女":"男"}}</div>
+    </div>
+    <div class="birthday" id="birthday">
+        <span>年龄</span>
+        <div>{{data.user.age==null?"未设置":data.user.age}}</div>
+    </div>
+    <div class="high">
+        <span>身高</span>
+        <div>{{data.user.height==null?"未设置":data.user.height+'cm'}}</div>
+    </div>
+    <div class="area">
+        <span>所在地区</span>
+        <div id="city" class="address">{{data.user.address==null?"未填写":data.user.address}}</div>
+    </div>
+    <div class="school">
+        <span>毕业学校</span>
+        <div>{{data.user.schoolName==null?"未设置":data.user.schoolName}}</div>
+    </div>
+    <div class="des">
+        <span>个人评价:</span>
+        <p>{{data.user.introduce==null?"未填写":data.user.introduce}}</p>
+    </div>
+    {{if data.status==5||data.status==4||data.status==6}}
+    <div class="job_style">
+        <span>岗位类型</span>
+        <div>{{data.job.workType}}</div>
+    </div>
+
+
+    <div class="pay_money">
+        <span>待付薪资</span>
+        <div><del>{{data.job.priceType}} </del>
+            <!--{{if data.status==4}}
+            <em>点击修改</em>
+            {{/if}}-->
+        </div>
+    </div>
+    <div id="pay_share">
+        <div class="box">
+            <input type="number" placeholder="￥请您输入待支付金额"/>
+        </div>
+        <button class="quit">取消</button>
+        <button class="confirm">确定</button>
+
+    </div>
+    {{/if}}
+    <div class="apply">
+        <!---->
+        {{if data.status==0}}
+        <button class="reject" onclick="dealJob('{{data.jobOrderId}}',2,this)">拒绝</button>
+        <button class="agree" onclick="dealJob('{{data.jobOrderId}}',1,this)">同意</button>
+        {{else if data.status==2}}
+        <button class="reject sure">订单已取消</button>
+        <button class="agree">已拒绝</button>
+        {{else if  data.status==1}}
+        <button class="reject sure">已同意</button>
+        <button class="agree">正在进行</button>
+        {{else if data.status==3}}
+        <button class="reject sure">订单已被取消</button>
+        <button class="agree">已同意</button>
+        {{else if data.status==5||data.status==4}}
+        <button class="reject sure">已确定订单</button>
+        <!--data.job.payMethod==0?"线下结算":-->
+        {{if data.job.payMethod==1}}
+        <button class="agree showPay" >等待支付</button>
+        {{else}}
+        <button class="agree">等待支付</button>
+        {{/if}}
+
+        {{else if data.status==6}}
+        <button class="reject sure">已确定订单</button>
+        <button class="agree">支付已完成</button>
+        {{/if}}
+    </div>
+</script>
+<script>
+
+
+    // /job/dealJobOrder  发布方处理报名订单
+    function dealJob(id,status,e){
+        function dojob(data){
+            console.log(data);
+            if(data.code==200){
+                $(e).text("已完成");
+                sweetAlert(
+                        "恭喜你",
+                        data.msg,
+                        "success"
+                ).then(function () {
+                            myAjax({url:`/job/order/${id}`,async:false},render);
+                        })
+            }else{
+                sweetAlert(
+                        "sorry",
+                        data.msg,
+                        "error"
+                ).then(function () {
+                            back()
+                        })
+            }
+        }
+        myAjax({url:`/job/dealJobOrder`,data:{jobOrderId:id,status:status},type:"post"},dojob);
+    }
+
+
+    function render(data){
+        console.log(data);
+        if(data.code==200){
+            template.helper("time",function(date){
+                var time=new Date(date).toLocaleString().replace(/:\d{1,2}$/,' ').replace(/\//g,"-");
+                return time;
+                /* return new Date(parseInt(date) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');*/
+            });
+            template.helper("str",function(str){
+                return str.substring(str.length-8,str.length-3) ;
+            })
+
+            $(".main").html(template("detail",data));
+
+            $/*(".work_time em").click(function () {
+                $("#share").show();
+                $("#mask").show();
+                $('body').css("overflow", "hidden")
+
+            });
+            $("#share .quit").click(function () {
+                $("#share").hide();
+                $("#mask").hide();
+                $('body').css("overflow", "auto")
+            });
+            $("#share .confirm").click(function () {
+                var data=$(".data").val().trim();
+                var hour=$(".hour").val().trim();
+                var min=$(".min").val().trim();
+                console.log(data+''+hour+""+min);
+                if(data==""&&hour==""&&min==""){
+                    alert("对不起，不能为空");
+                    return;
+                }
+                if(data == ""){
+                    data=0;
+                }
+                if(hour==""){
+                    hour=0;
+                }
+                if(min==""){
+                    min=0;
+                }
+                $(".work_time>div>del").text(data+"天"+hour+"小时"+min+"分")
+                $("#share").hide();
+                $("#mask").hide();
+                $('body').css("overflow", "auto")
+            });*/
+            $(".showPay").click(function () {
+                $("#pay_share").show();
+                $("#mask").show();
+                $('body').css("overflow", "hidden")
+            });
+            $("#pay_share .quit").click(function () {
+                $("#pay_share").hide();
+                $("#mask").hide();
+                $('body').css("overflow", "auto")
+            });
+            $("#pay_share .confirm").click(function () {
+                var money=$("#pay_share input").val().trim();
+                if(money== ""){
+                    alert("对不起，你不能输入空");
+                }else{
+                    $(".pay_money>div>del").text(money);
+                    $("#pay_share").hide();
+                    $("#mask").hide();
+                    $('body').css("overflow", "auto");
+                    var id=location.href.split("=")[1];
+                    //updateTotalPrice(id,money);
+                    payWorkPrice(id,money);
+                }
+            })
+            // /pay/payWorkPrice/{jobOrderId} 支付工资
+            function payWorkPrice(id,price){
+                function pay(data){
+                    console.log(data);
+                    if(data.code==200){
+                        sweetAlert(
+                                "恭喜您",
+                                data.msg,
+                                "success"
+                        ).then(function () {
+                                    myAjax({url:`/job/order/${id}`,async:false},render);
+                                })
+                    }else{
+                        sweetAlert(
+                                "sorry",
+                                data.msg,
+                                "error"
+                        )
+                    }
+                }
+                // /pay/payWorkPrice/{jobOrderId}/{totalPrice}
+
+                myAjax({url:"/pay/payWorkPrice/"+id+"/"+price,type:"post"},pay);
+            }
+            //  /job/updateTotalPrice/{jobOrderId}/{totalPrice} 修改工资金额
+         /*function updateTotalPrice(id,price){
+                function update(data){
+                    console.log(data);
+                    if(data.code==200){
+                        sweetAlert(
+                                "恭喜您",
+                                data.msg,
+                                "success"
+                        ).then(function () {
+                                    $(".main").html(template("detail",data));
+                                })
+                    }else{
+                        sweetAlert(
+                                "sorry",
+                                data.msg,
+                                "error"
+                        )
+                    }
+                }
+                myAjax({url:`/job/updateTotalPrice/${id}/${price}`,type:"post"},update);
+            }*/
+
+        }
+    }
+    $(function () {
+        var id=location.href.split("=")[1];
+        console.log(id);
+
+
+            myAjax({url:`/job/order/${id}`,async:false},render);
+
+    })
+</script>
 </html>

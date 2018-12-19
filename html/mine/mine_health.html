@@ -116,17 +116,38 @@ $(function () {
 $(".begin_path").click(function () {
     var base64IdCardBack=$(".open_box").css("background-image").replace('url(','').replace(')','');
     //var base64IdCardBack=$(".open_box").css('backgroundImage').replace('url(','').replace(')','');
-    console.log(base64IdCardBack);
-    if(base64IdCardBack.replace(/\"/g,"") =="http://localhost:63342/DD/img/my_hel_card.png"){
+    //console.log(base64IdCardBack);
+    if(base64IdCardBack.replace(/\"/g,"").match("img/my_hel_card.png")){
+    //if(base64IdCardBack.replace(/\"/g,"") =="http://localhost:63342/DD/img/my_hel_card.png"){
         sweetAlert(
                 'sorry',
                 '您还没有上传图片喔！',
                 'error'
         )
-        base64IdCardBack="";
+        return false;
     }else{
-        base64IdCardBack=base64IdCardBack;
+        base64IdCardBack=base64IdCardBack.replace(/"/g,"");
     }
+
+function path(data){
+    console.log(data);
+    if(data.code==200){
+        sweetAlert(
+                "恭喜您",
+                "上传成功，等待认证",
+                "success"
+        )
+        $(".begin_path").text("等待审核");
+    }else{
+        sweetAlert(
+                "sorry",
+                data.msg,
+                "error"
+        )
+    }
+}
+   // /user/uploadHealthImage
+    myAjax({url:"/user/uploadHealthImage",data:{healthImage:base64IdCardBack},type:"post"},path);
 })
 
 })

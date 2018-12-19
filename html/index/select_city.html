@@ -625,8 +625,6 @@
             //create
             window.indexedList = new mui.IndexedList(list);
             $('.mui-placeholder').css({'z-index':'-1'});
-
-
         });
         //获取高度作出padding值
         var guild = $('.guild').height();
@@ -646,14 +644,15 @@
             // 调用接口 发给后台 成功之后 back()返回
             //sendCity(text);
             //console.log(text);
-            //back();
+            back();
         })
         $(".btnout").click(function(){
             var hotCity=$(this).text();
             console.log(hotCity);
             localStorage.setItem("city",hotCity);
+            back()
             // 调用接口 发给后台 成功之后 back()返回
-            sendCity(hotCity);
+           // sendCity(hotCity);
 
         })
     /*if(localStorage.getItem("city")){
@@ -714,6 +713,12 @@
                     /*document.getElementById('info').innerHTML = '您当前所在城市：'+cityinfo;*/
                     document.querySelector(".location_city").innerText=cityinfo;
                     console.log(cityinfo);
+                    if(cityinfo.match("市")){
+                        cityinfo=cityinfo.replace("市","");
+                        console.log(cityinfo);
+                        localStorage.setItem("city",cityinfo);
+                    }
+                    localStorage.setItem("city",cityinfo);
                     //地图显示当前城市
                     map.setBounds(citybounds);
                 }
